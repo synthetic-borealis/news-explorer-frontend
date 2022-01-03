@@ -1,3 +1,6 @@
+/* Third Party CSS */
+@import url('./vendor/styles/normalize.css');
+
 /* Fonts */
 @import url('./vendor/fonts/inter/inter.css');
 @import url('./vendor/fonts/roboto/roboto.css');
@@ -9,9 +12,4 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

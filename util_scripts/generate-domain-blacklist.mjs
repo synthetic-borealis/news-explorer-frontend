@@ -14,7 +14,7 @@ const gistOwner = 'synthetic-borealis';
 const gistId = '331aef3e90f5e657f17cbdb25151665d';
 const domainListGist = `${gistBaseUrl}/${gistOwner}/${gistId}`;
 const domainListSourceFile = 'disposable-email-provider-domains';
-const outputFileName = './src/utils/domain-blacklist.js';
+const outputFileName = './src/utils/domainBlacklist.js';
 
 const getFile = (fileUrl) => {
   return fetch(fileUrl, {
@@ -112,7 +112,7 @@ const rawList = await getFile(domainListGist)
 if (typeof rawList === 'string') {
   let domainBlacklist = rawList.split('\n');
   domainBlacklist = domainBlacklist.map((value) => `  '${value}'`);
-  const output = `const domainBlacklist = [\n${domainBlacklist.join(',\n')},\n];\n\nmodule.exports = domainBlacklist;\n`;
+  const output = `const domainBlacklist = [\n${domainBlacklist.join(',\n')},\n];\n\nexport default domainBlacklist;\n`;
 
   fs.writeFile(outputFileName, output, (err) => {
     if (err) {
