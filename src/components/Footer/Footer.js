@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 import githubIcon from "../../images/icons/icon-github.svg";

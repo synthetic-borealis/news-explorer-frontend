@@ -1,0 +1,12 @@
+.Header {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 19px 0 13px;
+  z-index: 2;
+  color: white;
+  outline: 2px dashed red;
+  box-sizing: border-box;
+}
