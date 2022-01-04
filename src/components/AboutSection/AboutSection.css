@@ -1,0 +1,5 @@
+.AboutSection {
+  display: inline-block;
+  width: 100%;
+  outline: 2px dashed green;
+}
