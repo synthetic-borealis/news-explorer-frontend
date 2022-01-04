@@ -10,7 +10,8 @@ function Button(props) {
     <button
       type={buttonType}
       className={buttonClassName}
-      onClick={(e) => e.preventDefault()}
+      onClick={props.onClick}
+      {...(props.ariaLabel ? { "aria-label": `${props.ariaLabel}` } : {})}
     >
       {props.children}
     </button>

@@ -1,13 +1,32 @@
-import './SearchForm.css';
+import React from "react";
+import "./SearchForm.css";
 
-import Button from '../Button/Button';
+import Button from "../Button/Button";
 
 function SearchForm(props) {
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const handleChange = (evt) => {
+    setSearchValue(evt.target.value);
+  };
+
   return (
     <form name="search-form" className="SearchForm" action="#">
-      <input name="search" className="SearchForm__input" placeholder="Enter topic" />
-      <Button type="submit" extraClasses="SearchForm__button">Search</Button>
-      {/* <button type="submit" className="SearchForm__button" onClick={(e) => e.preventDefault()}>Search</button> */}
+      <input
+        name="search"
+        className="SearchForm__input"
+        placeholder="Enter topic"
+        value={searchValue}
+        onChange={handleChange}
+      />
+      <Button
+        type="submit"
+        extraClasses="SearchForm__button"
+        onClick={(e) => e.preventDefault()}
+        ariaLabel="search button"
+      >
+        Search
+      </Button>
     </form>
   );
 }
