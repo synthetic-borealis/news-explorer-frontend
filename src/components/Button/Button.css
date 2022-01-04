@@ -9,6 +9,8 @@
   font-size: 18px;
   line-height: 1.33;
   font-weight: 400;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .Button:hover {
