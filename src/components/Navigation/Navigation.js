@@ -1,10 +1,16 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 import "./Navigation.css";
 
 import Button from "../Button/Button";
+import SignoutButton from "../SignoutButton/SignoutButton";
 import { routePaths } from "../../utils/constants";
 
 function Navigation(props) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const userName = currentUser ? currentUser.name.split(" ")[0] : '';
   const buttonClasses = `Navigation__button`;
 
   return (
@@ -18,8 +24,7 @@ function Navigation(props) {
           <NavLink className="Navigation__link" activeClassName="Navigation__link_active" to={routePaths.savedNews}>Saved articles</NavLink>
         </li>
         <li className="Navigation__item">
-          {/* <NavButton>Elise</NavButton> */}
-          <Button extraClasses="Navigation__button">Elise B.</Button>
+          {currentUser ? <SignoutButton userName={userName}/> : ''}
         </li>
       </ul>
     </nav>
