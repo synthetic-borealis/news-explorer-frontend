@@ -1,3 +1,4 @@
+import { Route, Switch, useHistory } from "react-router-dom";
 import "./App.css";
 
 import Header from "../Header/Header";
@@ -8,7 +9,11 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );

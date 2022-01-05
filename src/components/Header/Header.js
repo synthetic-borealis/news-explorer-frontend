@@ -1,9 +1,11 @@
 import "./Header.css";
 
+import Navigation from "../Navigation/Navigation";
+
 function Header(props) {
   return (
     <header className="Header">
-      <h2>Header</h2>
+      <Navigation />
     </header>
   );
 }

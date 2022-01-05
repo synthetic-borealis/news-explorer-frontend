@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
+import { routePaths } from "../../utils/constants";
+
 import githubIcon from "../../images/icons/icon-github.svg";
 import instagramIcon from "../../images/icons/icon-instagram.svg";
 
@@ -13,9 +15,9 @@ function Footer() {
         </p>
         <ul className="Footer__links">
           <li className="Footer__link-item">
-            <a href="#" className="Footer__link">
+            <Link to={routePaths.home} className="Footer__link">
               Home
-            </a>
+            </Link>
           </li>
           <li className="Footer__link-item">
             <a
