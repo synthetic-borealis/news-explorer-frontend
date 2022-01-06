@@ -22,7 +22,6 @@
   display: flex;
   list-style-type: none;
   box-sizing: border-box;
-  /* outline: 2px dashed yellow; */
 }
 
 .Navigation__item {
@@ -31,6 +30,10 @@
   align-items: center;
   padding: 0;
   margin-left: 52px;
+}
+
+.Navigation__item_margin_narrow {
+  margin-left: 32px;
 }
 
 .Navigation__link {

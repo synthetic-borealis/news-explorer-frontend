@@ -1,0 +1,15 @@
+.LoginButton {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  outline: 1px solid white;
+  padding: 12px 19px;
+  min-width: 176px;
+}
+
+.LoginButton__label {
+  padding: 0;
+  margin: 0;
+}

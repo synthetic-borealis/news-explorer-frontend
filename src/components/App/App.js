@@ -14,11 +14,20 @@ function App() {
     name: "Elise Bauer",
     email: "elise.bauer@aperturescience.com",
   });
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+
+  function handleLogout() {
+    setIsLoggedIn(false);
+  }
+
+  function handleLogin() {
+    setIsLoggedIn(true);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header />
+        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} onLogin={handleLogin} />
         <Switch>
           <Route exact path="/">
             <Main />

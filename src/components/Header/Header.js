@@ -5,7 +5,7 @@ import Navigation from "../Navigation/Navigation";
 function Header(props) {
   return (
     <header className="Header">
-      <Navigation />
+      <Navigation isLoggedIn={props.isLoggedIn} onLogout={props.onLogout} onLogin={props.onLogin} />
     </header>
   );
 }

@@ -5,7 +5,7 @@ import logoutIcon from "../../images/icons/icon-logout.svg";
 
 function SignoutButton(props) {
   return (
-    <Button extraClasses="SignoutButton">
+    <Button extraClasses="SignoutButton" onClick={props.onClick}>
       <p className="SignoutButton__label">{props.userName}</p>
       <img src={logoutIcon} className="SignoutButton__icon" />
     </Button>
