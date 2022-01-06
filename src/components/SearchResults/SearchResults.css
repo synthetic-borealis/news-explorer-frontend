@@ -12,7 +12,6 @@
   padding: 80px 0;
   width: calc(1232 / 1440 * 100%);
   max-width: 1232px;
-  outline: 2px dashed blue;
 }
 
 .SearchResults__title {

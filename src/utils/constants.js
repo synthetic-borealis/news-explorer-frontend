@@ -3,10 +3,26 @@ const routePaths = {
   savedNews: "/saved-news",
 };
 
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 // TODO: Remove placeholder articles list
 // once News API connectivity is implemented
 const articles = [
   {
+    keyword: "Finance",
     source: {
       id: "business-insider",
       name: "Business Insider",
@@ -23,6 +39,7 @@ const articles = [
       "Welcome to 10 Things Before the Opening Bell.\r\nIf this was forwarded to you, sign up here. Plus, download Insider's app for news on the go click here for iOS andhere for Android.\r\nLet's jump in. \r\n1.… [+3214 chars]",
   },
   {
+    keyword: "Crypto",
     source: {
       id: null,
       name: "City A.M.",
@@ -40,6 +57,7 @@ const articles = [
       "Wednesday 05 January 2022 11:21 am\r\nThe cryptocurrency markets are broadly flat this morning. Bitcoin is up one per cent to just below $47k, while second-largest cryptocurrency Ethereum is up 1.5 per… [+7110 chars]",
   },
   {
+    keyword: "Finance",
     source: {
       id: "bloomberg",
       name: "Bloomberg",
@@ -56,6 +74,7 @@ const articles = [
       "You're reading the Bloomberg Green newsletter. Sign up here to get it in your inbox daily. \r\nIn climate news today...\r\nIts official. For the first time since the unveiling of \r\nthe Paris climate agre… [+5146 chars]",
   },
   {
+    keyword: "U.S.A",
     source: {
       id: null,
       name: "Seeking Alpha",
@@ -72,6 +91,7 @@ const articles = [
       "MicroStockHub/iStock via Getty Images\r\nBy Chris Hogbin\r\n \nGlobal equities surged in 2021 during a year full of surprises. As the new year begins, perhaps the only sure thing is that there will be mor… [+13181 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: null,
       name: "Autocar",
@@ -88,6 +108,7 @@ const articles = [
       "An American firm has developed a prototype electric vehicle battery that it claims can provide 752 miles of range on a single charge. \r\nOur Next Energy (One), a battery developer based in Michigan, i… [+1426 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: null,
       name: "Motor Authority",
@@ -106,6 +127,7 @@ const articles = [
       "Sony used the 2022 Consumer Electronics Show currently underway in Las Vegas to present the Vision-S 02 concept.\r\nThe electric crossover is the follow up to the Vision-S electric sedan concept that S… [+1864 chars]",
   },
   {
+    keyword: "A.I.",
     source: {
       id: null,
       name: "Autocar",
@@ -122,6 +144,7 @@ const articles = [
       'Zeekr, a new premium electric car brand from Chinese giant Geely, has agreed a deal to work with Intel-owned Mobileye to launch what it claims will be "the world’s first consumer autonomous vehicle" … [+1500 chars]',
   },
   {
+    keyword: "Tesla",
     source: {
       id: null,
       name: "Motley Fool",
@@ -138,6 +161,7 @@ const articles = [
       "Monday kicked off the new trading year with a bang as the S&amp;P 500 burst through to a fresh all-time high. Yet the most striking story was Tesla's (NASDAQ:TSLA) blowout fourth-quarter 2021 and ful… [+4817 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: "the-irish-times",
       name: "The Irish Times",
@@ -154,6 +178,7 @@ const articles = [
       "Sony is launching a new company to explore entry into the electric vehicle market, joining a long list of technology groups that are considering a move into the next-generation car business.\r\nKenichi… [+3143 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: "newsweek",
       name: "Newsweek",
@@ -171,6 +196,7 @@ const articles = [
       "The Joe Biden administration has signaled its disapproval of Tesla's decision to open a dealership in China's Xinjiang region, where the United States and several other governments say Uyghur Muslims… [+4793 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: null,
       name: "This is Money",
@@ -188,6 +214,7 @@ const articles = [
       "Sony has echoed its ambitions to enter the automotive sector with the unveiling of a second concept car and the launch of a new subsidiary to explore the production of electric vehicles.\r\nDuring a pr… [+4297 chars]",
   },
   {
+    keyword: "Tesla",
     source: {
       id: null,
       name: "PCMag.com",
@@ -205,4 +232,4 @@ const articles = [
   },
 ];
 
-export { routePaths, articles };
+export { routePaths, monthNames, articles };
