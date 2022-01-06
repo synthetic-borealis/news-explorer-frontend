@@ -1,0 +1,26 @@
+.SearchResults {
+  display: inline-block;
+  width: 100%;
+  background-color: #f5f6f7;
+}
+
+.SearchResuls__container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 80px 0;
+  width: calc(1232 / 1440 * 100%);
+  max-width: 1232px;
+  outline: 2px dashed blue;
+}
+
+.SearchResults__title {
+  padding: 0;
+  margin: 0 0 64px 0;
+  font-family: "Roboto Slab", sans-serif;
+  font-size: 40px;
+  line-height: 1.15;
+  font-weight: 400;
+  color: #1a1b22;
+}
