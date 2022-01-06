@@ -1,14 +1,23 @@
 import "./SearchResults.css";
 
+import React from "react";
+
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 
 function SearchResults(props) {
-  const currentCards = props.currentResults.slice(0, 3);
+  const [numberOfCards, setNumberOfCards] = React.useState(3);
+  const currentCards = props.currentResults.length > 0 ? props.currentResults.slice(0, numberOfCards) : [];
+  const cardNumberDifference = props.currentResults.length - numberOfCards;
 
   function handleShowMore() {
-    console.log("Showing more");
+    if (numberOfCards >= props.currentResults.length) return;
+    if (cardNumberDifference > 3) {
+      setNumberOfCards(numberOfCards + 3);
+    } else {
+      setNumberOfCards(numberOfCards + cardNumberDifference);
+    }
   }
 
   return (
@@ -20,7 +29,11 @@ function SearchResults(props) {
             <NewsCard key={index} cardData={card} />
           ))}
         </NewsCardList>
-        <ShowMoreButton onClick={handleShowMore} />
+        {cardNumberDifference > 0 ? (
+          <ShowMoreButton onClick={handleShowMore} />
+        ) : (
+          ""
+        )}
       </div>
     </section>
   );

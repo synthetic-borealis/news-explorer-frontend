@@ -17,6 +17,8 @@ function NewsCard(props) {
       <div className="NewsCard__container">
         <p className="NewsCard__date">{dateString}</p>
         <h3 className="NewsCard__title">{props.cardData.title}</h3>
+        <p className="NewsCard__content">{props.cardData.content.split("[")[0]}</p>
+        <p className="NewsCard__source">{props.cardData.source.name}</p>
       </div>
       <a href={props.cardData.url} className="NewsCard__link" target="_blank">{props.cardData.title}</a>
     </article>
