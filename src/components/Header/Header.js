@@ -8,7 +8,7 @@ function Header(props) {
 
   return (
     <header className="Header">
-      <Navigation isLoggedIn={props.isLoggedIn} onLogout={props.onLogout} onLogin={props.onLogin} />
+      <Navigation isLoggedIn={props.isLoggedIn} onLogoutClick={props.onLogoutClick} onLoginClick={props.onLoginClick} />
     </header>
   );
 }

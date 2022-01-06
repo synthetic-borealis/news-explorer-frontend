@@ -27,7 +27,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header isLoggedIn={isLoggedIn} onLogout={handleLogout} onLogin={handleLogin} />
+        <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} />
         <Switch>
           <Route exact path="/">
             <Main />

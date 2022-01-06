@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 function ShowMoreButton(props) {
   return (
-  <Button extraClasses="ShowMoreButton" onClick={props.onClick}>Show more</Button>
+  <Button extraClasses="ShowMoreButton" ariaLabel="show more" onClick={props.onClick}>Show more</Button>
   );
 }
 

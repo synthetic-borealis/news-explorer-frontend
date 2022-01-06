@@ -40,11 +40,11 @@ function Navigation(props) {
         )}
         {props.isLoggedIn ? (
           <li className="Navigation__item">
-            <SignoutButton userName={userName} onClick={props.onLogout} />
+            <SignoutButton userName={userName} ariaLabel="sign out" onClick={props.onLogoutClick} />
           </li>
         ) : (
           <li className="Navigation__item Navigation__item_margin_narrow">
-            <LoginButton onClick={props.onLogin} />
+            <LoginButton ariaLabel="sign in" onClick={props.onLoginClick} />
           </li>
         )}
       </ul>
