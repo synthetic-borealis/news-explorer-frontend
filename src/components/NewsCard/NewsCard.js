@@ -4,6 +4,7 @@ import React from "react";
 import { useLocation } from "react-router";
 import NewsCardButton from "../NewsCardButton/NewsCardButton";
 import Tooltip from "../Tooltip/Tooltip";
+import TagBubble from "../TagBubble/TagBubble";
 
 import { monthNames, routePaths } from "../../utils/constants";
 
@@ -27,6 +28,9 @@ function NewsCard(props) {
   const tooltipClasses = `NewsCard__tooltip${
     isTooltipVisible ? " NewsCard__tooltip_visible" : ""
   }`;
+
+  const tagBubbleClasses = "NewsCard__tag-bubble";
+  const tagBubbleCaption = props.cardData.keyword ? props.cardData.keyword : "";
 
   const handleButtonMouseEnter = () => {
     setIsTooltipVisible(true);
@@ -56,7 +60,7 @@ function NewsCard(props) {
         </p>
         <p className="NewsCard__source">{props.cardData.source.name}</p>
       </div>
-      <a href={props.cardData.url} className="NewsCard__link" target="_blank">
+      <a href={props.cardData.url} className="NewsCard__link" target="_blank" rel="noreferrer">
         {props.cardData.title}
       </a>
       <NewsCardButton
@@ -66,6 +70,7 @@ function NewsCard(props) {
         isSaved={isSaved}
       />
       <Tooltip extraClasses={tooltipClasses} caption={tooltipCaption} />
+      {location.pathname === routePaths.savedNews ? <TagBubble extraClasses={tagBubbleClasses} caption={tagBubbleCaption} /> : ""}
     </article>
   );
 }

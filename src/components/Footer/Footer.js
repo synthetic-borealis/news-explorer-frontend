@@ -24,6 +24,7 @@ function Footer() {
               href="https://practicum.yandex.com/"
               className="Footer__link"
               target="_blank"
+              rel="noreferrer"
             >
               Practicum by Yandex
             </a>
@@ -33,6 +34,7 @@ function Footer() {
               href="https://github.com/synthetic-borealis"
               className="Footer__link"
               target="_blank"
+              rel="noreferrer"
             >
               <img className="Footer__icon" src={githubIcon} alt="github" />
             </a>
@@ -42,6 +44,7 @@ function Footer() {
               href="https://www.instagram.com/hasarius/"
               className="Footer__link"
               target="_blank"
+              rel="noreferrer"
             >
               <img
                 className="Footer__icon"

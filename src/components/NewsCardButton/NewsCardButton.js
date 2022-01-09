@@ -24,36 +24,18 @@ function NewsCardButton(props) {
       : ""
   }`;
 
-  switch (location.pathname) {
-    case routePaths.home:
-      return (
-        <Button
-          extraClasses="NewsCardButton"
-          onClick={props.onClick}
-          onMouseEnter={props.onMouseEnter}
-          onMouseLeave={props.onMouseLeave}
-        >
-          <img className={iconClasses} src={icon} />
-        </Button>
-      );
-      break;
+  const iconAltString = location.pathname === routePaths.savedNews ? "delete" : "save";
 
-    case routePaths.savedNews:
-      return (
-        <Button
-          extraClasses="NewsCardButton"
-          onClick={props.onClick}
-          onMouseEnter={props.onMouseEnter}
-          onMouseLeave={props.onMouseLeave}
-        >
-          <img className="NewsCardButton__icon" src={deleteIcon} />
-        </Button>
-      );
-      break;
-
-    default:
-      return <></>;
-  }
+  return (
+    <Button
+      extraClasses="NewsCardButton"
+      onClick={props.onClick}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
+    >
+      <img className={iconClasses} src={icon} alt={iconAltString} />
+    </Button>
+  );
 }
 
 export default NewsCardButton;
