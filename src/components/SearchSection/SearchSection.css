@@ -46,3 +46,20 @@
   margin: 32px auto 0;
   padding: 0;
 }
+
+@media screen and (max-width: 1044px) {
+  .SearchSection__container {
+    width: calc(448 / 768 * 100%);
+    max-width: 448px;
+  }
+
+  .SearchSection__title {
+    margin-top: 104px;
+    font-size: 36px;
+    line-height: 1.11;
+  }
+
+  .SearchSection__subtitle {
+    margin-top: 16px;
+  }
+}

@@ -25,7 +25,7 @@ function SearchForm(props) {
         onClick={(e) => e.preventDefault()}
         ariaLabel="search button"
       >
-        Search
+        <span className="SearchForm__button-label">Search</span>
       </Button>
     </form>
   );
