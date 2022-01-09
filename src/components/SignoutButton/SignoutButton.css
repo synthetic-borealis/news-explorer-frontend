@@ -9,6 +9,11 @@
   padding: 12px 19px;
 }
 
+.SignoutButton_background_white {
+  color: #1a1b22;
+  outline-color: #1a1b22;
+}
+
 .SignoutButton__label {
   padding: 0;
   margin: 0;
@@ -22,5 +27,10 @@
 .SignoutButton__icon {
   width: 24px;
   height: 24px;
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(147deg) brightness(118%) contrast(99%);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(147deg)
+    brightness(118%) contrast(99%);
+}
+
+.SignoutButton_background_white .SignoutButton__icon {
+  filter: none;
 }

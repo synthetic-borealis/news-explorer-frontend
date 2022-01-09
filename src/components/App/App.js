@@ -7,10 +7,11 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./App.css";
 
 import Header from "../Header/Header";
+import SavedNews from "../SavedNews/SavedNews";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 
-import { routePaths } from "../../utils/constants";
+import { routePaths, articles } from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
@@ -35,7 +36,10 @@ function App() {
       <div className="App">
         <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} />
         <Switch>
-          <Route exact path="/">
+          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
+            <SavedNews savedArticles={articles} />
+          </ProtectedRoute>
+          <Route exact path={routePaths.home}>
             <Main isLoggedIn={isLoggedIn} />
           </Route>
         </Switch>
