@@ -25,7 +25,7 @@ function Navigation(props) {
         <li className="Navigation__item">
           <NavLink
             exact
-            className="Navigation__link"
+            className="Navigation__link Navigation__link_target_home"
             activeClassName="Navigation__link_active"
             to={routePaths.home}
           >
@@ -36,7 +36,7 @@ function Navigation(props) {
           <li className="Navigation__item">
             <NavLink
               exact
-              className="Navigation__link"
+              className="Navigation__link Navigation__link_target_saved"
               activeClassName="Navigation__link_active"
               to={routePaths.savedNews}
             >
@@ -55,7 +55,7 @@ function Navigation(props) {
             />
           </li>
         ) : (
-          <li className="Navigation__item Navigation__item_margin_narrow">
+          <li className="Navigation__item">
             <LoginButton ariaLabel="sign in" onClick={props.onLoginClick} />
           </li>
         )}

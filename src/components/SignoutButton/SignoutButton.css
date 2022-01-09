@@ -9,6 +9,12 @@
   padding: 12px 19px;
 }
 
+@media screen and (max-width: 1044px) {
+  .SignoutButton {
+    padding: 8px 13px;
+  }
+}
+
 .SignoutButton_background_white {
   color: #1a1b22;
   outline-color: #1a1b22;
