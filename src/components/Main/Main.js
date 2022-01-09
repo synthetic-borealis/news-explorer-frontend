@@ -10,7 +10,7 @@ function Main(props) {
   return (
     <main>
       <SearchSection />
-      <SearchResults currentResults={articles} isLoggedIn={props.isLoggedIn} />
+      <SearchResults currentResults={articles} isLoggedIn={props.isLoggedIn} onCardButtonClick={props.onCardButtonClick} />
       <AboutSection />
     </main>
   );

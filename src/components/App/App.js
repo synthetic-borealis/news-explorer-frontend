@@ -31,16 +31,24 @@ function App() {
     setIsLoggedIn(true);
   }
 
+  function handleSaveCard(cardData) {
+    alert("Saving card");
+  }
+
+  function handleDeleteCard(cardData) {
+    alert("Deleting card");
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} />
         <Switch>
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
-            <SavedNews savedArticles={articles} />
+            <SavedNews savedArticles={articles} onCardButtonClick={handleDeleteCard} />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
-            <Main isLoggedIn={isLoggedIn} />
+            <Main isLoggedIn={isLoggedIn} onCardButtonClick={handleSaveCard} />
           </Route>
         </Switch>
         <Footer />

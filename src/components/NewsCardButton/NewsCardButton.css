@@ -40,3 +40,13 @@
 .NewsCardButton:hover .NewsCardButton__icon {
   filter: none;
 }
+
+.NewsCardButton__icon_filled {
+  filter: none;
+  transition: opacity .25s ease-in-out;
+}
+
+.NewsCardButton:hover .NewsCardButton__icon_filled {
+  filter: none;
+  opacity: .6;
+}

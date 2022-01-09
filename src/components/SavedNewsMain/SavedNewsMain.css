@@ -1,0 +1,12 @@
+.SavedNewsMain {
+  position: relative;
+  width: 100%;
+  padding: 62px 0;
+  background-color: #f5f6f7;
+}
+
+.SavedNewsMain__container {
+  width: calc(1232 / 1440 * 100%);
+  max-width: 1232px;
+  margin: 0 auto;
+}
