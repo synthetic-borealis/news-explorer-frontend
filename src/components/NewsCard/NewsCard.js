@@ -1,11 +1,27 @@
 import "./NewsCard.css";
 
-import { monthNames } from "../../utils/constants";
+import React from "react";
+import { useLocation } from "react-router";
+import NewsCardButton from "../NewsCardButton/NewsCardButton";
+import Tooltip from "../Tooltip/Tooltip";
+
+import { monthNames, routePaths } from "../../utils/constants";
 
 function NewsCard(props) {
+  const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
   const cardImage = `url(${props.cardData.urlToImage})`;
   const cardDate = new Date(props.cardData.publishedAt);
   const dateString = `${monthNames[cardDate.getMonth()]} ${cardDate.getDate()}, ${cardDate.getFullYear()}`;
+  const tooltipCaption = "Sign in to save articles";
+  const tooltipClasses = `NewsCard__tooltip${isTooltipVisible ? " NewsCard__tooltip_visible" : ""}`;
+
+  const handleButtonMouseEnter = (evt) => {
+    setIsTooltipVisible(true);
+  };
+
+  const handleButtonMouseLeave = (evt) => {
+    setIsTooltipVisible(false);
+  };
 
   return (
     <article className="NewsCard">
@@ -21,6 +37,8 @@ function NewsCard(props) {
         <p className="NewsCard__source">{props.cardData.source.name}</p>
       </div>
       <a href={props.cardData.url} className="NewsCard__link" target="_blank">{props.cardData.title}</a>
+      <NewsCardButton onMouseEnter={handleButtonMouseEnter} onMouseLeave={handleButtonMouseLeave} />
+      <Tooltip extraClasses={tooltipClasses} caption={tooltipCaption} />
     </article>
   );
 }

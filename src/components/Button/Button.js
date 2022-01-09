@@ -11,6 +11,8 @@ function Button(props) {
       type={buttonType}
       className={buttonClassName}
       onClick={props.onClick}
+      onMouseEnter={props.onMouseEnter}
+      onMouseLeave={props.onMouseLeave}
       {...(props.ariaLabel ? { "aria-label": `${props.ariaLabel}` } : {})}
     >
       {props.children}

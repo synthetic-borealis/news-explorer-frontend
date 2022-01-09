@@ -26,7 +26,7 @@ function SearchResults(props) {
         <h2 className="SearchResults__title">Search results</h2>
         <NewsCardList>
           {currentCards.map((card, index) => (
-            <NewsCard key={index} cardData={card} />
+            <NewsCard key={index} cardData={card} isLoggedIn={props.isLoggedIn} />
           ))}
         </NewsCardList>
         {cardNumberDifference > 0 ? (

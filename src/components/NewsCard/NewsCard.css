@@ -91,3 +91,35 @@
   opacity: 0;
   content: "";
 }
+
+.NewsCard__tooltip {
+  position: absolute;
+  top: 24px;
+  right: 69px;
+  padding: 0 22px;
+  min-height: 40px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .25s ease-in-out, opacity .25s ease-in-out;
+}
+
+/* Tablet */
+@media screen and (max-width: 1044px) {
+  .NewsCard__tooltip {
+    top: 8px;
+    right: 53px;
+  }
+}
+
+/* Mobile phone */
+@media screen and (max-width: 480px) {
+  .NewsCard__tooltip {
+    top: 16px;
+    right: 61px;
+  }
+}
+
+.NewsCard__tooltip_visible {
+  visibility: visible;
+  opacity: 1;
+}

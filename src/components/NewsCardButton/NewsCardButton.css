@@ -1,0 +1,42 @@
+.NewsCardButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: white;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tablets */
+@media screen and (max-width: 1044px) {
+  .NewsCardButton {
+    top: 8px;
+    left: 8px;
+  }
+}
+
+/* Mobile phones */
+@media screen and (max-width: 480px) {
+  .NewsCardButton {
+    top: 16px;
+    left: 16px;
+  }
+}
+
+.NewsCardButton__icon {
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  filter: invert(86%) sepia(7%) saturate(181%) hue-rotate(156deg)
+    brightness(91%) contrast(81%);
+  transition: filter 0.25s ease-in-out;
+}
+
+.NewsCardButton:hover .NewsCardButton__icon {
+  filter: none;
+}
