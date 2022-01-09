@@ -23,3 +23,17 @@
   font-weight: 400;
   color: #1a1b22;
 }
+
+@media screen and (max-width: 1044px) {
+  .SearchResuls__container {
+    width: calc(688 / 768 * 100%);
+    max-width: 688px;
+    padding: 40px 0;
+  }
+
+  .SearchResults__title {
+    font-size: 30px;
+    line-height: 1.13;
+    margin-bottom: 32px;
+  }
+}
