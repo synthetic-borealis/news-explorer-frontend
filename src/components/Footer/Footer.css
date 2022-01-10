@@ -4,7 +4,6 @@
   padding: 30px 0;
   margin: 0;
   box-sizing: border-box;
-  outline: 2px dashed tomato;
 }
 
 .Footer__container {
@@ -97,5 +96,49 @@
   .Footer__icon {
     width: 22px;
     height: 22px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .Footer {
+    padding-bottom: 32px;
+  }
+
+  .Footer__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+    flex-direction: column;
+  }
+
+  .Footer__copyright {
+    order: 2;
+  }
+
+  .Footer__links {
+    width: 100%;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 20px;
+    column-gap: 48px;
+    margin-bottom: 38px;
+  }
+
+  .Footer__link-item {
+    margin: 0;
+    text-align: left;
+  }
+
+  .Footer__link-item:nth-of-type(2) {
+    margin-bottom: 0;
+  }
+
+  .Footer__link-item:nth-last-of-type(1) {
+    margin: 0;
+  }
+
+  .Footer__icon-links {
+    padding: 0;
+    margin: 0;
   }
 }
