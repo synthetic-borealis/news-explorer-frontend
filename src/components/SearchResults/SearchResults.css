@@ -42,7 +42,7 @@
   .SearchResuls__container {
     width: calc(288 / 320 * 100%);
     max-width: 288px;
-    padding: 32px 0;
+    padding: 32px 0 24px;
   }
 
   .SearchResults__title {

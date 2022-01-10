@@ -69,3 +69,26 @@
     line-height: 1.33;
   }
 }
+
+@media screen and (max-width: 680px) {
+  .AboutSection__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+    flex-direction: column;
+    margin: 32px auto 128px;
+  }
+
+  .AboutSection__avatar {
+    width: 272px;
+    height: 272px;
+    margin: 0 auto 24px;
+  }
+
+  .AboutSection__title {
+    margin-bottom: 16px;
+  }
+
+  .AboutSection__paragraph_last {
+    margin-bottom: 0;
+  }
+}
