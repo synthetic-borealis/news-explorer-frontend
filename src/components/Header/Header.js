@@ -7,7 +7,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 
 import { routePaths } from "../../utils/constants";
 
-function Header(props) {
+function Header({ isLoggedIn, onLoginClick, onLogoutClick, ...props }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
   const isBackgroundWhite = location.pathname === routePaths.savedNews;
@@ -52,15 +52,25 @@ function Header(props) {
     <header className={headerClasses}>
       {isMenuOpen ? <div className={menuUnderlayClasses} /> : ""}
       <Navigation
-        isLoggedIn={props.isLoggedIn}
-        onLogoutClick={props.onLogoutClick}
-        onLoginClick={props.onLoginClick}
+        isLoggedIn={isLoggedIn}
+        onLogoutClick={onLogoutClick}
+        onLoginClick={onLoginClick}
         onMenuButtonClick={handleMenuButton}
         isMobilePhone={isMobilePhone}
         isMenuOpen={isMenuOpen}
         isBackgroundWhite={isBackgroundWhite}
       />
-      {isMobilePhone ? <MobileMenu isOpen={isMenuOpen} /> : ""}
+      {isMobilePhone ? (
+        <MobileMenu
+          isOpen={isMenuOpen}
+          isLoggedIn={isLoggedIn}
+          isBackgroundWhite={isBackgroundWhite}
+          onLoginClick={onLoginClick}
+          onLogoutClick={onLogoutClick}
+        />
+      ) : (
+        ""
+      )}
     </header>
   );
 }
