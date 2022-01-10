@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import "./Navigation.css";
@@ -10,12 +10,10 @@ import MenuButton from "../MenuButton/MenuButton";
 import { routePaths } from "../../utils/constants";
 
 function Navigation(props) {
-  const location = useLocation();
   const currentUser = React.useContext(CurrentUserContext);
   const userName = props.isLoggedIn ? currentUser.name.split(" ")[0] : "";
-  const isBackgroundWhite = location.pathname === routePaths.savedNews;
   const navigationClasses = `Navigation${
-    isBackgroundWhite ? " Navigation_background_white" : ""
+    props.isBackgroundWhite ? " Navigation_background_white" : ""
   }`;
 
   return (
@@ -24,8 +22,8 @@ function Navigation(props) {
       {props.isMobilePhone ? (
         <MenuButton
           onClick={props.onMenuButtonClick}
-          isMenuOpen={false}
-          isBackgroundWhite={isBackgroundWhite}
+          isMenuOpen={props.isMenuOpen}
+          isBackgroundWhite={props.isBackgroundWhite}
         />
       ) : (
         <ul className="Navigation__container">

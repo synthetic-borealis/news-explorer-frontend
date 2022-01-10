@@ -60,10 +60,6 @@
   color: white;
 }
 
-.Navigation_background_white .Navigation__link {
-  color: #1a1b22;
-}
-
 .Navigation__link_active::after {
   position: absolute;
   width: 100%;
@@ -73,6 +69,11 @@
   content: "";
   border-bottom: 3px solid white;
 }
+
+.Navigation_background_white .Navigation__link {
+  color: #1a1b22;
+}
+
 
 .Navigation_background_white .Navigation__link_active::after {
   border-color: #1a1b22;

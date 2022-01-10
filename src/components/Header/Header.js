@@ -7,23 +7,29 @@ import Navigation from "../Navigation/Navigation";
 import { routePaths } from "../../utils/constants";
 
 function Header(props) {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const location = useLocation();
+  const isBackgroundWhite = location.pathname === routePaths.savedNews;
   const maxMobileWidth = 680;
   const [isMobilePhone, setIsMobilePhone] = React.useState(
     window.innerWidth <= maxMobileWidth
   );
-  const location = useLocation();
-  const headerClasses = `Header${
-    location.pathname === routePaths.savedNews ? " Header_background_white" : ""
-  }`;
+  let headerClasses = "Header";
+  if (isMenuOpen) {
+    headerClasses = headerClasses.concat(" Header_background_dark");
+  }
+  if (isBackgroundWhite) {
+    headerClasses = headerClasses.concat(" Header_background_white");
+  }
 
   function handleMenuButton() {
-    console.log("toggling menu");
+    setIsMenuOpen(!isMenuOpen);
   }
 
   function handleWindowResize() {
     setIsMobilePhone(window.innerWidth <= maxMobileWidth);
-    if (isMobilePhone) {
-      console.log("mobile phone resolution");
+    if (!isMobilePhone) {
+      setIsMenuOpen(false);
     }
   }
 
@@ -40,6 +46,8 @@ function Header(props) {
         onLoginClick={props.onLoginClick}
         onMenuButtonClick={handleMenuButton}
         isMobilePhone={isMobilePhone}
+        isMenuOpen={isMenuOpen}
+        isBackgroundWhite={isBackgroundWhite}
       />
     </header>
   );
