@@ -63,3 +63,14 @@
     margin-top: 16px;
   }
 }
+
+@media screen and (max-width: 680px) {
+  .SearchSection__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+  }
+
+  .SearchSection__title {
+    margin-top: 86px;
+  }
+}

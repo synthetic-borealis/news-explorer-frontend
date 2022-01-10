@@ -62,6 +62,30 @@
   }
 }
 
+@media screen and (max-width: 680px) {
+  .SearchForm {
+    margin-top: 122px;
+    flex-direction: column;
+    border-radius: 0;
+    background-color: transparent;
+    margin-bottom: 32px;
+  }
+
+  .SearchForm__input {
+    width: 100%;
+    max-width: 288px;
+    padding: 17px 16px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .SearchForm__button {
+    width: 100%;
+    max-width: 288px;
+    padding: 16px 116px;
+  }
+}
+
 .SearchForm__input:focus {
   outline: 0;
 }

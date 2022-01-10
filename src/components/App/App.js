@@ -42,7 +42,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} />
+        {/* <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} /> */}
         <Switch>
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
             <SavedNews savedArticles={articles} onCardButtonClick={handleDeleteCard} />
