@@ -92,6 +92,7 @@
   .NewsCard__date {
     margin-bottom: 12px;
   }
+
   .NewsCard__title {
     font-size: 22px;
     line-height: 1.09;
@@ -114,10 +115,22 @@
     max-width: 192px;
     margin: 16px;
   }
+}
 
-  /* .NewsCard__date {
-    margin-bottom: 10px;
-  } */
+@media screen and (max-width: 680px) {
+  .NewsCard__container {
+    max-width: 256px;
+  }
+
+  .NewsCard__title {
+    margin-bottom: 12px;
+    -webkit-line-clamp: 2;
+    min-height: calc(2 * 1.09em);
+  }
+
+  .NewsCard__content {
+    margin-bottom: 8px;
+  }
 }
 
 .NewsCard__link {

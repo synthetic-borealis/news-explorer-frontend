@@ -37,3 +37,15 @@
     margin-bottom: 32px;
   }
 }
+
+@media screen and (max-width: 680px) {
+  .SearchResuls__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+    padding: 32px 0;
+  }
+
+  .SearchResults__title {
+    margin-bottom: 58px;
+  }
+}
