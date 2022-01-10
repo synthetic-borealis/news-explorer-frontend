@@ -73,3 +73,24 @@
     margin-bottom: 32px;
   }
 }
+
+@media screen and (max-width: 680px) {
+  .SavedNewsHeader {
+    padding-top: 64px;
+  }
+
+  .SavedNewsHeader__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+  }
+
+  .SavedNewsHeader__title {
+    font-size: 12px;
+    line-height: 2;
+  }
+
+  .SavedNewsHeader__subtitle {
+    width: 100%;
+    margin: 0 auto 50px;
+  }
+}
