@@ -30,28 +30,32 @@ function Footer() {
             </a>
           </li>
           <li className="Footer__link-item">
-            <a
-              href="https://github.com/synthetic-borealis"
-              className="Footer__link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img className="Footer__icon" src={githubIcon} alt="github" />
-            </a>
-          </li>
-          <li className="Footer__link-item">
-            <a
-              href="https://www.instagram.com/hasarius/"
-              className="Footer__link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                className="Footer__icon"
-                src={instagramIcon}
-                alt="instagram"
-              />
-            </a>
+            <ul className="Footer__icon-links">
+              <li className="Footer__icon-link">
+                <a
+                  href="https://github.com/synthetic-borealis"
+                  className="Footer__link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img className="Footer__icon" src={githubIcon} alt="github" />
+                </a>
+              </li>
+              <li className="Footer__icon-link">
+                <a
+                  href="https://www.instagram.com/hasarius/"
+                  className="Footer__link"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <img
+                    className="Footer__icon"
+                    src={instagramIcon}
+                    alt="instagram"
+                  />
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
