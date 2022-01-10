@@ -46,3 +46,30 @@
 .SavedNewsHeader__keyword-list {
   font-weight: 700;
 }
+
+@media screen and (max-width: 1044px) {
+  .SavedNewsHeader {
+    padding-top: 90px;
+  }
+
+  .SavedNewsHeader__container {
+    width: calc(688 / 768 * 100%);
+    max-width: 688px;
+  }
+
+  .SavedNewsHeader__title {
+    font-size: 14px;
+    line-height: 1.71;
+    margin-bottom: 16px;
+  }
+
+  .SavedNewsHeader__subtitle {
+    font-size: 30px;
+    line-height: 1.13;
+    margin-bottom: 16px;
+  }
+
+  .SavedNewsHeader__keywords {
+    margin-bottom: 32px;
+  }
+}
