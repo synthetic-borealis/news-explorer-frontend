@@ -1,0 +1,25 @@
+.MobileMenu {
+  position: absolute;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  top: 100%;
+  left: 0;
+  background-color: #1A1B22;
+  max-height: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, max-height 0.2s ease-in-out;
+}
+
+.MobileMenu__open {
+  max-height: calc(100vh - 100%);
+  opacity: 1;
+}
+
+.MobileMenu__container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 16px auto 24px;
+  list-style-type: none;
+}

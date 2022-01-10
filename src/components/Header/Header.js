@@ -3,6 +3,7 @@ import "./Header.css";
 import React from "react";
 import { useLocation } from "react-router";
 import Navigation from "../Navigation/Navigation";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 import { routePaths } from "../../utils/constants";
 
@@ -16,11 +17,17 @@ function Header(props) {
   );
   let headerClasses = "Header";
   if (isMenuOpen) {
-    headerClasses = headerClasses.concat(" Header_background_dark");
+    headerClasses = headerClasses.concat(
+      " Header_with-menu Header_background_dark"
+    );
   }
   if (isBackgroundWhite) {
     headerClasses = headerClasses.concat(" Header_background_white");
   }
+
+  const menuUnderlayClasses = `Header__menu-underlay${
+    isMenuOpen ? " Header__menu-underlay_active" : ""
+  }`;
 
   function handleMenuButton() {
     setIsMenuOpen(!isMenuOpen);
@@ -28,9 +35,6 @@ function Header(props) {
 
   function handleWindowResize() {
     setIsMobilePhone(window.innerWidth <= maxMobileWidth);
-    if (!isMobilePhone) {
-      setIsMenuOpen(false);
-    }
   }
 
   React.useEffect(() => {
@@ -38,8 +42,15 @@ function Header(props) {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
+  React.useEffect(() => {
+    if (!isMobilePhone) {
+      setIsMenuOpen(false);
+    }
+  }, [isMobilePhone]);
+
   return (
     <header className={headerClasses}>
+      {isMenuOpen ? <div className={menuUnderlayClasses} /> : ""}
       <Navigation
         isLoggedIn={props.isLoggedIn}
         onLogoutClick={props.onLogoutClick}
@@ -49,6 +60,7 @@ function Header(props) {
         isMenuOpen={isMenuOpen}
         isBackgroundWhite={isBackgroundWhite}
       />
+      {isMobilePhone ? <MobileMenu isOpen={isMenuOpen} /> : ""}
     </header>
   );
 }
