@@ -55,6 +55,7 @@
   font-family: "Roboto Slab", sans-serif;
   font-size: 26px;
   line-height: 1.15;
+  font-weight: 400;
   min-height: calc(2 * 1.15em);
 }
 

@@ -21,3 +21,14 @@
     max-width: 688px;
   }
 }
+
+@media screen and (max-width: 680px) {
+  .SavedNewsMain {
+    padding: 24px 0 13px;
+  }
+
+  .SavedNewsMain__container {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+  }
+}
