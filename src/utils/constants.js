@@ -18,6 +18,12 @@ const monthNames = [
   "December",
 ];
 
+const popupContentTypes = {
+  signIn: 0,
+  signUp: 1,
+  success: 2,
+};
+
 // TODO: Remove placeholder articles list
 // once News API connectivity is implemented
 const articles = [
@@ -232,4 +238,4 @@ const articles = [
   },
 ];
 
-export { routePaths, monthNames, articles };
+export { routePaths, monthNames, popupContentTypes, articles };

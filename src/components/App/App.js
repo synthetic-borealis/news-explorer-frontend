@@ -10,8 +10,13 @@ import Header from "../Header/Header";
 import SavedNews from "../SavedNews/SavedNews";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+import Popup from "../Popup/Popup";
 
-import { routePaths, articles } from "../../utils/constants";
+import {
+  popupContentTypes,
+  routePaths,
+  articles,
+} from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({
@@ -19,6 +24,25 @@ function App() {
     email: "elise.bauer@aperturescience.com",
   });
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isPopupOpen, setIsPopupOpen] = React.useState(true);
+  const [isPopupVisible, setIsPopupVisible] = React.useState(true);
+  const [popupContentType, setPopupContentType] = React.useState(popupContentTypes.signIn);
+
+  React.useEffect(() => {
+    if (isPopupOpen) {
+      setIsPopupVisible(true);
+    } else {
+      setPopupContentType(popupContentTypes.signIn);
+    }
+  }, [isPopupOpen]);
+
+  React.useEffect(() => {
+    const popupTransitionDelay = 0.25;
+
+    if(!isPopupVisible) {
+      setTimeout(() => setIsPopupOpen(false), popupTransitionDelay);
+    }
+  }, [isPopupVisible]);
 
   const history = useHistory();
 
@@ -39,19 +63,50 @@ function App() {
     alert("Deleting card");
   }
 
+  function handlePopupClose() {
+    setIsPopupVisible(false);
+    setIsPopupOpen(false);
+  }
+
+  function renderPopupContent() {
+    switch (popupContentType) {
+      case popupContentTypes.signIn:
+        return <h2>Sign In</h2>;
+
+      case popupContentTypes.signUp:
+        return <h2>Sign Up</h2>;
+
+      case popupContentTypes.success:
+        return <h2>Registeration successful</h2>;
+
+      default:
+        return <h2>You shouldn't see this</h2>
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-        <Header isLoggedIn={isLoggedIn} onLogoutClick={handleLogout} onLoginClick={handleLogin} />
+        <Header
+          isLoggedIn={isLoggedIn}
+          onLogoutClick={handleLogout}
+          onLoginClick={handleLogin}
+        />
         <Switch>
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
-            <SavedNews savedArticles={articles} onCardButtonClick={handleDeleteCard} />
+            <SavedNews
+              savedArticles={articles}
+              onCardButtonClick={handleDeleteCard}
+            />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
             <Main isLoggedIn={isLoggedIn} onCardButtonClick={handleSaveCard} />
           </Route>
         </Switch>
         <Footer />
+        {isPopupOpen
+        ? <Popup isVisible={isPopupVisible} onClose={handlePopupClose}>{renderPopupContent()}</Popup>
+        : ""}
       </div>
     </CurrentUserContext.Provider>
   );

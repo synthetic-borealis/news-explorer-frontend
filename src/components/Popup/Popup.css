@@ -1,0 +1,69 @@
+.Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
+}
+
+.Popup_visible {
+  pointer-events: all;
+  visibility: visible;
+  opacity: 1;
+}
+
+.Popup__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+  content: "";
+  opacity: 0.5;
+}
+
+.Popup__modal {
+  position: relative;
+  width: calc(430 / 1440 * 100%);
+  max-width: 430px;
+  margin: 0 auto;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+}
+
+.Popup__close-button {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: calc(100% + 16px);
+}
+
+@media screen and (max-width: 1044px) {
+  .Popup__modal {
+    width: calc(430 / 768 * 100%);
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .Popup__modal {
+    width: 100%;
+    max-width: 100%;
+    margin: 56px 0 0;
+    height: calc(100vh - 56px);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .Popup__close-button {
+    left: unset;
+    right: 16px;
+  }
+}
