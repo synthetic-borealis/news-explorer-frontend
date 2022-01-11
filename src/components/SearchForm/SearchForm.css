@@ -26,6 +26,16 @@
   box-sizing: border-box;
 }
 
+.SearchForm__input:focus {
+  outline: 0;
+}
+
+.SearchForm__input::placeholder,
+.SearchForm__input::-moz-placeholder,
+.SearchForm__input::-webkit-input-placeholder {
+  color: #b6bcbf;
+}
+
 .SearchForm__button {
   display: flex;
   justify-content: center;
@@ -35,6 +45,17 @@
   max-width: 168px;
   min-width: max-content;
   padding: 20px 56px;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  background-color: #2f71e5;
+  transition: background-color 0.2s linear;
+}
+
+.SearchForm__button:hover {
+  background-color: #347EFF;
+}
+
+.SearchForm__button:active {
+  background-color: #2A65CC;
 }
 
 .SearchForm__button-label {
@@ -84,29 +105,4 @@
     max-width: 288px;
     padding: 16px 116px;
   }
-}
-
-.SearchForm__input:focus {
-  outline: 0;
-}
-
-.SearchForm__input::placeholder,
-.SearchForm__input::-moz-placeholder,
-.SearchForm__input::-webkit-input-placeholder {
-  color: #b6bcbf;
-}
-
-.SearchForm__button {
-  width: calc(168 / 608 * 100%);
-  max-width: 168px;
-  background-color: #2f71e5;
-  transition: background-color .2s linear;
-}
-
-.SearchForm__button:hover {
-  background-color: #347EFF;
-}
-
-.SearchForm__button:active {
-  background-color: #2A65CC;
 }

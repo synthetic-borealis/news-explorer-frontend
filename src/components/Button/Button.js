@@ -1,21 +1,22 @@
 import "./Button.css";
 
-function Button(props) {
+function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, children, disabled, ...props}) {
   const buttonClassName = `Button${
-    props.extraClasses ? ` ${props.extraClasses}` : ""
+    extraClasses ? ` ${extraClasses}` : ""
   }`;
-  const buttonType = props.type ? props.type : "button";
+  const buttonType = type ? type : "button";
 
   return (
     <button
       type={buttonType}
       className={buttonClassName}
-      onClick={props.onClick}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       {...(props.ariaLabel ? { "aria-label": `${props.ariaLabel}` } : {})}
+      disabled={disabled}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

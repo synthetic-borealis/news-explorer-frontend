@@ -11,6 +11,7 @@ import SavedNews from "../SavedNews/SavedNews";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Popup from "../Popup/Popup";
+import SignInForm from "../SignInForm/SignInForm";
 
 import {
   popupContentTypes,
@@ -71,7 +72,7 @@ function App() {
   function renderPopupContent() {
     switch (popupContentType) {
       case popupContentTypes.signIn:
-        return <h2>Sign In</h2>;
+        return <SignInForm />;
 
       case popupContentTypes.signUp:
         return <h2>Sign Up</h2>;

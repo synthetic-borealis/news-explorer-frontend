@@ -36,6 +36,7 @@
   width: calc(430 / 1440 * 100%);
   max-width: 430px;
   margin: 0 auto;
+  padding: 0;
   border-radius: 16px;
   background-color: white;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
@@ -50,6 +51,7 @@
 @media screen and (max-width: 1044px) {
   .Popup__modal {
     width: calc(430 / 768 * 100%);
+    max-width: 430px;
   }
 }
 
