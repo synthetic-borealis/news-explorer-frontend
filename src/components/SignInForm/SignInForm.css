@@ -1,0 +1,20 @@
+
+.SignInForm .SignInForm__input {
+  margin-bottom: 31px;
+}
+
+.SignInForm__input:last-of-type {
+  margin-bottom: 39px;
+}
+
+@media screen and (max-width: 680px) {
+  .SignInForm .SignInForm__input {
+    margin-bottom: 30px;
+  }
+
+  .SignInForm__input:last-of-type {
+    /* 23px causes some error messages to overlap with the submit button */
+    /* margin-bottom: 23px; */
+    margin-bottom: 36px;
+  }
+}

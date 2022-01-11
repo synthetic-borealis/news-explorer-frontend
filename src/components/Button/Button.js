@@ -14,7 +14,7 @@ function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, childr
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...(props.ariaLabel ? { "aria-label": `${props.ariaLabel}` } : {})}
-      disabled={disabled}
+      {...(disabled ? {disabled: true} : {})}
     >
       {children}
     </button>
