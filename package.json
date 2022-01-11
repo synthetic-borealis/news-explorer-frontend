@@ -19,6 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint src",
+    "lint:log": "eslint src > lint.log",
     "gen-blacklist": "node util_scripts/generate-domain-blacklist.mjs"
   },
   "eslintConfig": {
