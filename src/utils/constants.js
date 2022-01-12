@@ -24,6 +24,8 @@ const popupContentTypes = {
   success: 2,
 };
 
+const maxMobileWidth = 680;
+
 // TODO: Remove placeholder articles list
 // once News API connectivity is implemented
 const articles = [
@@ -238,4 +240,4 @@ const articles = [
   },
 ];
 
-export { routePaths, monthNames, popupContentTypes, articles };
+export { routePaths, monthNames, popupContentTypes, maxMobileWidth, articles };

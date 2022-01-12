@@ -7,14 +7,10 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 
 import { routePaths } from "../../utils/constants";
 
-function Header({ isLoggedIn, onLoginClick, onLogoutClick, ...props }) {
+function Header({ isLoggedIn, onLoginClick, onLogoutClick, isMobilePhone, ...props }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
   const isBackgroundWhite = location.pathname === routePaths.savedNews;
-  const maxMobileWidth = 680;
-  const [isMobilePhone, setIsMobilePhone] = React.useState(
-    window.innerWidth <= maxMobileWidth
-  );
   let headerClasses = "Header";
   if (isMenuOpen) {
     headerClasses = headerClasses.concat(
@@ -32,15 +28,6 @@ function Header({ isLoggedIn, onLoginClick, onLogoutClick, ...props }) {
   function handleMenuButton() {
     setIsMenuOpen(!isMenuOpen);
   }
-
-  function handleWindowResize() {
-    setIsMobilePhone(window.innerWidth <= maxMobileWidth);
-  }
-
-  React.useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
 
   React.useEffect(() => {
     if (!isMobilePhone) {

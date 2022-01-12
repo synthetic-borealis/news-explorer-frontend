@@ -16,10 +16,19 @@ import SignInForm from "../SignInForm/SignInForm";
 import {
   popupContentTypes,
   routePaths,
+  maxMobileWidth,
   articles,
 } from "../../utils/constants";
 
 function App() {
+  const history = useHistory();
+  const [isMobilePhone, setIsMobilePhone] = React.useState(
+    window.innerWidth <= maxMobileWidth
+  );
+  const [windowSize, setWindowSize] = React.useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
   const [currentUser, setCurrentUser] = React.useState({
     name: "Elise Bauer",
     email: "elise.bauer@aperturescience.com",
@@ -27,25 +36,16 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isPopupOpen, setIsPopupOpen] = React.useState(true);
   const [isPopupVisible, setIsPopupVisible] = React.useState(true);
-  const [popupContentType, setPopupContentType] = React.useState(popupContentTypes.signIn);
+  const [popupContentType, setPopupContentType] = React.useState(
+    popupContentTypes.signIn
+  );
 
-  React.useEffect(() => {
-    if (isPopupOpen) {
-      setIsPopupVisible(true);
-    } else {
-      setPopupContentType(popupContentTypes.signIn);
-    }
-  }, [isPopupOpen]);
-
-  React.useEffect(() => {
-    const popupTransitionDelay = 0.25;
-
-    if(!isPopupVisible) {
-      setTimeout(() => setIsPopupOpen(false), popupTransitionDelay);
-    }
-  }, [isPopupVisible]);
-
-  const history = useHistory();
+  function handleWindowResize() {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }
 
   function handleLogout() {
     setIsLoggedIn(false);
@@ -81,15 +81,41 @@ function App() {
         return <h2>Registeration successful</h2>;
 
       default:
-        return <h2>You shouldn't see this</h2>
+        return <h2>You shouldn't see this</h2>;
     }
   }
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
+  React.useEffect(() => {
+    setIsMobilePhone((windowSize.width <= maxMobileWidth));
+  }, [windowSize]);
+
+  React.useEffect(() => {
+    if (isPopupOpen) {
+      setIsPopupVisible(true);
+    } else {
+      setPopupContentType(popupContentTypes.signIn);
+    }
+  }, [isPopupOpen]);
+
+  React.useEffect(() => {
+    const popupTransitionDelay = 0.25;
+
+    if (!isPopupVisible) {
+      setTimeout(() => setIsPopupOpen(false), popupTransitionDelay);
+    }
+  }, [isPopupVisible]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header
           isLoggedIn={isLoggedIn}
+          isMobilePhone={isMobilePhone}
           onLogoutClick={handleLogout}
           onLoginClick={handleLogin}
         />
@@ -105,9 +131,13 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        {isPopupOpen
-        ? <Popup isVisible={isPopupVisible} onClose={handlePopupClose}>{renderPopupContent()}</Popup>
-        : ""}
+        {isPopupOpen ? (
+          <Popup isVisible={isPopupVisible} onClose={handlePopupClose}>
+            {renderPopupContent()}
+          </Popup>
+        ) : (
+          ""
+        )}
       </div>
     </CurrentUserContext.Provider>
   );
