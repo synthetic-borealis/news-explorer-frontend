@@ -1,0 +1,18 @@
+
+.SignUpForm .SignUpForm__input {
+  margin-bottom: 31px;
+}
+
+.SignUpForm__input:last-of-type {
+  margin-bottom: 17px;
+}
+
+@media screen and (max-width: 680px) {
+  .SignUpForm .SignUpForm__input {
+    margin-bottom: 30px;
+  }
+
+  .SignUpForm__input:last-of-type {
+    margin-bottom: 17px;
+  }
+}

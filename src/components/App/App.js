@@ -12,6 +12,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Popup from "../Popup/Popup";
 import SignInForm from "../SignInForm/SignInForm";
+import SignUpForm from "../SignUpForm/SignUpForm";
 
 import {
   popupContentTypes,
@@ -56,6 +57,10 @@ function App() {
     setIsLoggedIn(true);
   }
 
+  function handleSignup() {
+    alert("Signup successful!");
+  }
+
   function handleSignupLink() {
     setPopupContentType(popupContentTypes.signUp);
   }
@@ -83,7 +88,7 @@ function App() {
         return <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />;
 
       case popupContentTypes.signUp:
-        return <h2>Sign Up</h2>;
+        return <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />;
 
       case popupContentTypes.success:
         return <h2>Registeration successful</h2>;
