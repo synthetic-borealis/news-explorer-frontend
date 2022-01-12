@@ -9,15 +9,17 @@ The frontend is currently under heavy development and can not yet connect to the
 - Throwaway e-mails (i.e. addresses associated with known temporary e-mail providers) are _**not**_ considered valid.
 
 ## Screenshots
-<figure style="position: relative; z-index: 1;">
+<figure>
 <img src="./screenshots/dev-s2-main.jpg" alt="main screen">
-<figcaption style="position: absolute; z-index: 2; bottom: 16px; left: 16px; padding: .2em .75em; border-radius: 10px; font-size: 14px; color: white; background-color: rgba(0, 0, 0, 0.6); box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);">The main screen.</figcaption>
+<figcaption style="font-weight: 500;">The main screen.</figcaption>
 </figure>
-<figure style="position: relative; z-index: 1;">
+<br>
+<figure>
 <img src="./screenshots/dev-s2-login-valid.jpg" alt="login with valid credentials">
-<figcaption style="position: absolute; z-index: 2; bottom: 16px; left: 16px; padding: .2em .75em; border-radius: 10px; font-size: 14px; color: white; background-color: rgba(0, 0, 0, 0.6); box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);">Logging in with valid credentials.</figcaption>
+<figcaption style="font-weight: 500;">Logging in with valid credentials.</figcaption>
 </figure>
-<figure style="position: relative; z-index: 1;">
+<br>
+<figure>
 <img src="./screenshots/dev-s2-login-bad-email.jpg" alt="login with an invalid e-mail">
-<figcaption style="position: absolute; z-index: 2; bottom: 16px; left: 16px; padding: .2em .75em; border-radius: 10px; font-size: 14px; color: white; background-color: rgba(0, 0, 0, 0.6); box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);">Logging in with an invalid e-mail.</figcaption>
+<figcaption style="font-weight: 500;">Logging in with an invalid e-mail.</figcaption>
 </figure>
