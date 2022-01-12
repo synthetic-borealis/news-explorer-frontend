@@ -11,15 +11,15 @@ The frontend is currently under heavy development and can not yet connect to the
 ## Screenshots
 <figure>
 <img src="./screenshots/dev-s2-main.jpg" alt="main screen">
-<figcaption style="font-weight: 500;">The main screen.</figcaption>
+  <figcaption><b>The main screen.</b></figcaption>
 </figure>
-<br>
+<br><br>
 <figure>
 <img src="./screenshots/dev-s2-login-valid.jpg" alt="login with valid credentials">
-<figcaption style="font-weight: 500;">Logging in with valid credentials.</figcaption>
+  <figcaption><b>Logging in with valid credentials.</b></figcaption>
 </figure>
-<br>
+<br><br>
 <figure>
 <img src="./screenshots/dev-s2-login-bad-email.jpg" alt="login with an invalid e-mail">
-<figcaption style="font-weight: 500;">Logging in with an invalid e-mail.</figcaption>
+  <figcaption><b>Logging in with an invalid e-mail.</b></figcaption>
 </figure>
