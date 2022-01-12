@@ -56,6 +56,14 @@ function App() {
     setIsLoggedIn(true);
   }
 
+  function handleSignupLink() {
+    setPopupContentType(popupContentTypes.signUp);
+  }
+
+  function handleSigninLink() {
+    setPopupContentType(popupContentTypes.signIn);
+  }
+
   function handleSaveCard(cardData) {
     alert("Saving card");
   }
@@ -72,7 +80,7 @@ function App() {
   function renderPopupContent() {
     switch (popupContentType) {
       case popupContentTypes.signIn:
-        return <SignInForm />;
+        return <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />;
 
       case popupContentTypes.signUp:
         return <h2>Sign Up</h2>;

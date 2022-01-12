@@ -1,6 +1,6 @@
 import "./Button.css";
 
-function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, children, disabled, ...props}) {
+function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, children, disabled, ariaLabel, ...props}) {
   const buttonClassName = `Button${
     extraClasses ? ` ${extraClasses}` : ""
   }`;
@@ -13,7 +13,7 @@ function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, childr
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      {...(props.ariaLabel ? { "aria-label": `${props.ariaLabel}` } : {})}
+      {...(ariaLabel ? { "aria-label": `${ariaLabel}` } : {})}
       {...(disabled ? {disabled: true} : {})}
     >
       {children}

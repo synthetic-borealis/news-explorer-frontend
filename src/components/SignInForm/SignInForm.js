@@ -5,14 +5,16 @@ import CredentialsForm from "../CredentialsForm/CredentialsForm";
 import FormInput from "../FormInput/FormInput";
 import { useStateObject } from "../../hooks/state-object";
 
-function SignInForm({ onSignIn, ...props }) {
+function SignInForm({ onSignIn, onClickLink, ...props }) {
   const formClassName = "SignInForm";
   const inputClassName = "SignInForm__input";
   const emailInputId = "signin-email-input";
   const passwordInputId = "signin-password-input";
   const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isErrorVisible, setIsErrorVisible] = React.useState(false);
   const emailState = { value: useStateObject(""), isValid: useStateObject(false) };
   const passwordState = { value: useStateObject(""), isValid: useStateObject(false) };
+  const errorMessage = "Here be monsters";
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -33,8 +35,12 @@ function SignInForm({ onSignIn, ...props }) {
       className={formClassName}
       name="signin-form"
       title="Sign in"
+      linkCaption="Sign up"
       onSubmit={handleSubmit}
+      onClickLink={onClickLink}
       isValid={isFormValid}
+      errorMessage={errorMessage}
+      isErrorVisible={isErrorVisible}
     >
       <FormInput
         type="email"
