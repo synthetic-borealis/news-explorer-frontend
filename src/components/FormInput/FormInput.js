@@ -16,7 +16,6 @@ function FormInput({
   state,
   required,
   autoComplete,
-  ...props
 }) {
   const [isErrorVisible, setIsErrorVisible] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");

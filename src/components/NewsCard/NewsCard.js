@@ -8,29 +8,38 @@ import TagBubble from "../TagBubble/TagBubble";
 
 import { monthNames, routePaths } from "../../utils/constants";
 
-function NewsCard(props) {
+function NewsCard({ isLoggedIn, cardData, onButtonClick }) {
   const [isSaved, setIsSaved] = React.useState(false); // TODO remove this line when News API functionality is implemented
   const location = useLocation();
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
-  const cardImage = `url(${props.cardData.urlToImage})`;
-  const cardDate = new Date(props.cardData.publishedAt);
+  const cardImage = `url(${cardData.urlToImage})`;
+  const cardDate = new Date(cardData.publishedAt);
   const dateString = `${
     monthNames[cardDate.getMonth()]
   } ${cardDate.getDate()}, ${cardDate.getFullYear()}`;
 
   const tooltipCaption =
     location.pathname === routePaths.home
-      ? props.isLoggedIn
+      ? isLoggedIn
         ? "Add to saved"
         : "Sign in to save articles"
       : "Remove from saved";
+
+  const cardClassName = "NewsCard";
+  const imageClassName = "NewsCard__image";
+  const containerClassName = "NewsCard__container";
+  const dateClassName = "NewsCard__date";
+  const titleClassName = "NewsCard__title";
+  const contentClassName = "NewsCard__content";
+  const sourceClassName = "NewsCard__source";
+  const linkClassName = "NewsCard__link";
 
   const tooltipClasses = `NewsCard__tooltip${
     isTooltipVisible ? " NewsCard__tooltip_visible" : ""
   }`;
 
   const tagBubbleClasses = "NewsCard__tag-bubble";
-  const tagBubbleCaption = props.cardData.keyword ? props.cardData.keyword : "";
+  const tagBubbleCaption = cardData.keyword ? cardData.keyword : "";
 
   const handleButtonMouseEnter = () => {
     setIsTooltipVisible(true);
@@ -42,26 +51,29 @@ function NewsCard(props) {
 
   const handleButtonClick = () => {
     setIsSaved(!isSaved); // TODO remove this line when News API functionality is implemented (?)
-    props.onButtonClick();
-  }
+    onButtonClick();
+  };
 
   return (
-    <article className="NewsCard">
+    <article className={cardClassName}>
       <div
-        className="NewsCard__image"
+        className={imageClassName}
         style={{ backgroundImage: cardImage }}
-        {...{ "aria-label": `${props.cardData.title}` }}
+        {...{ "aria-label": `${cardData.title}` }}
       />
-      <div className="NewsCard__container">
-        <p className="NewsCard__date">{dateString}</p>
-        <h3 className="NewsCard__title">{props.cardData.title}</h3>
-        <p className="NewsCard__content">
-          {props.cardData.content.split("[")[0]}
-        </p>
-        <p className="NewsCard__source">{props.cardData.source.name}</p>
+      <div className={containerClassName}>
+        <p className={dateClassName}>{dateString}</p>
+        <h3 className={titleClassName}>{cardData.title}</h3>
+        <p className={contentClassName}>{cardData.content.split("[")[0]}</p>
+        <p className={sourceClassName}>{cardData.source.name}</p>
       </div>
-      <a href={props.cardData.url} className="NewsCard__link" target="_blank" rel="noreferrer">
-        {props.cardData.title}
+      <a
+        href={cardData.url}
+        className={linkClassName}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {cardData.title}
       </a>
       <NewsCardButton
         onMouseEnter={handleButtonMouseEnter}
@@ -69,8 +81,12 @@ function NewsCard(props) {
         onClick={handleButtonClick}
         isSaved={isSaved}
       />
-      <Tooltip extraClasses={tooltipClasses} caption={tooltipCaption} />
-      {location.pathname === routePaths.savedNews ? <TagBubble extraClasses={tagBubbleClasses} caption={tagBubbleCaption} /> : ""}
+      <Tooltip className={tooltipClasses} caption={tooltipCaption} />
+      {location.pathname === routePaths.savedNews ? (
+        <TagBubble className={tagBubbleClasses} caption={tagBubbleCaption} />
+      ) : (
+        ""
+      )}
     </article>
   );
 }

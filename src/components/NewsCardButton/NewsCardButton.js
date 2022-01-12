@@ -9,29 +9,31 @@ import { routePaths } from "../../utils/constants";
 
 import Button from "../Button/Button";
 
-function NewsCardButton(props) {
+function NewsCardButton({ onClick, onMouseEnter, onMouseLeave, isSaved }) {
   const location = useLocation();
   const icon =
     location.pathname === routePaths.savedNews
       ? deleteIcon
-      : props.isSaved
+      : isSaved
       ? filledBookmarkIcon
       : bookmarkIcon;
 
+  const buttonClassName = "NewsCardButton";
   const iconClasses = `NewsCardButton__icon${
-    location.pathname === routePaths.home && props.isSaved
+    location.pathname === routePaths.home && isSaved
       ? " NewsCardButton__icon_filled"
       : ""
   }`;
 
-  const iconAltString = location.pathname === routePaths.savedNews ? "delete" : "save";
+  const iconAltString =
+    location.pathname === routePaths.savedNews ? "delete" : "save";
 
   return (
     <Button
-      extraClasses="NewsCardButton"
-      onClick={props.onClick}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
+      className={buttonClassName}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <img className={iconClasses} src={icon} alt={iconAltString} />
     </Button>

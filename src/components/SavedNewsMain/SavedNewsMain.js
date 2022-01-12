@@ -3,16 +3,21 @@ import "./SavedNewsMain.css";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NewsCard from "../NewsCard/NewsCard";
 
-function SavedNewsMain(props) {
-  const savedArticles =
-    props.savedArticles.length > 0 ? props.savedArticles : [];
+function SavedNewsMain({ savedArticles, isLoggedIn, onCardButtonClick }) {
+  const sectionClassName = "SavedNewsMain";
+  const containerClassName = "SavedNewsMain__container";
 
   return (
-    <section className="SavedNewsMain">
-      <div className="SavedNewsMain__container">
+    <section className={sectionClassName}>
+      <div className={containerClassName}>
         <NewsCardList>
           {savedArticles.map((card, index) => (
-            <NewsCard key={index} cardData={card} isLoggedIn onButtonClick={() => props.onCardButtonClick(card)} />
+            <NewsCard
+              key={index}
+              cardData={card}
+              isLoggedIn={isLoggedIn}
+              onButtonClick={() => onCardButtonClick(card)}
+            />
           ))}
         </NewsCardList>
       </div>

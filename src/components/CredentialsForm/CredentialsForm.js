@@ -13,7 +13,6 @@ function CredentialsForm({
   className,
   errorMessage,
   isErrorVisible,
-  ...props
 }) {
   const formClassName = `CredentialsForm${className ? ` ${className}` : ""}`;
   const titleClassName = "CredentialsForm__title";
@@ -31,7 +30,7 @@ function CredentialsForm({
       <span className={errorLabelClass}>{errorMessage}</span>
       <Button
         type="submit"
-        extraClasses={submitButtonClass}
+        className={submitButtonClass}
         {...(!isValid ? { disabled: true } : {})}
       >
         {title}

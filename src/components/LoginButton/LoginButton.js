@@ -1,10 +1,12 @@
 import Button from "../Button/Button";
 import "./LoginButton.css";
 
-function LoginButton(props) {
+function LoginButton({ onClick }) {
+  const buttonClassName = "LoginButton";
+  const labelClassName = "LoginButton__label";
   return (
-    <Button onClick={props.onClick} extraClasses="LoginButton">
-      <p className="LoginButton__label">Sign In</p>
+    <Button onClick={onClick} className={buttonClassName}>
+      <p className={labelClassName}>Sign In</p>
     </Button>
   );
 }

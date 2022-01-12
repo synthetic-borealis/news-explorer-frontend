@@ -7,7 +7,7 @@ import MobileMenu from "../MobileMenu/MobileMenu";
 
 import { routePaths } from "../../utils/constants";
 
-function Header({ isLoggedIn, onLoginClick, onLogoutClick, isMobilePhone, ...props }) {
+function Header({ isLoggedIn, onLoginClick, onLogoutClick, isMobilePhone }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
   const isBackgroundWhite = location.pathname === routePaths.savedNews;

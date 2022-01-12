@@ -5,7 +5,7 @@ import CredentialsForm from "../CredentialsForm/CredentialsForm";
 import FormInput from "../FormInput/FormInput";
 import { useStateObject } from "../../hooks/state-object";
 
-function SignUpForm({ onSignUp, onClickLink, ...props }) {
+function SignUpForm({ onSignUp, onClickLink }) {
   const formClassName = "SignUpForm";
   const inputClassName = "SignUpForm__input";
   const emailInputId = "signup-email-input";

@@ -1,7 +1,9 @@
 import "./NewsCardList.css";
 
-function NewsCardList(props) {
-  return (<ul className="NewsCardList">{props.children}</ul>);
+function NewsCardList({ children }) {
+  const listClassName = "NewsCardList";
+
+  return <ul className={listClassName}>{children}</ul>;
 }
 
 export default NewsCardList;

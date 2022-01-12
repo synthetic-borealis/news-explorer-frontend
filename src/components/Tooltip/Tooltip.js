@@ -1,12 +1,14 @@
 import "./Tooltip.css";
 
-function Tooltip(props) {
-  const tooltipClasses = `Tooltip${props.extraClasses ? ` ${props.extraClasses}` : ""}`;
-  return (<div className={tooltipClasses}>
-    <p className="Tooltip__caption">
-      {props.caption}
-    </p>
-  </div>)
+function Tooltip({ className, caption }) {
+  const tooltipClasses = `Tooltip${className ? ` ${className}` : ""}`;
+  const captionClassName = "Tooltip__caption";
+
+  return (
+    <div className={tooltipClasses}>
+      <p className={captionClassName}>{caption}</p>
+    </div>
+  );
 }
 
 export default Tooltip;

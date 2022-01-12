@@ -1,9 +1,16 @@
 import "./Button.css";
 
-function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, children, disabled, ariaLabel, ...props}) {
-  const buttonClassName = `Button${
-    extraClasses ? ` ${extraClasses}` : ""
-  }`;
+function Button({
+  type,
+  className,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  children,
+  disabled,
+  ariaLabel,
+}) {
+  const buttonClassName = `Button${className ? ` ${className}` : ""}`;
   const buttonType = type ? type : "button";
 
   return (
@@ -14,7 +21,7 @@ function Button({type, extraClasses, onClick, onMouseEnter, onMouseLeave, childr
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...(ariaLabel ? { "aria-label": `${ariaLabel}` } : {})}
-      {...(disabled ? {disabled: true} : {})}
+      {...(disabled ? { disabled: true } : {})}
     >
       {children}
     </button>

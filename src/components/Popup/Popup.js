@@ -2,8 +2,8 @@ import "./Popup.css";
 
 import CloseButton from "../CloseButton/CloseButton";
 
-function Popup({isVisible, onClose, children, ...props}) {
-  const popupClassName = `Popup${isVisible ? ' Popup_visible' : ''}`;
+function Popup({ isVisible, onClose, children }) {
+  const popupClassName = `Popup${isVisible ? " Popup_visible" : ""}`;
   const overlayClass = "Popup__overlay";
   const modalClass = "Popup__modal";
   const closeButtonClass = "Popup__close-button";
@@ -15,7 +15,11 @@ function Popup({isVisible, onClose, children, ...props}) {
   }
 
   return (
-    <section className={popupClassName} onKeyDown={handleEscapePress} tabIndex="0">
+    <section
+      className={popupClassName}
+      onKeyDown={handleEscapePress}
+      tabIndex="0"
+    >
       <div className={overlayClass} onClick={onClose} />
       <div className={modalClass}>
         {children}

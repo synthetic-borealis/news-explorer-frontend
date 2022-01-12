@@ -13,6 +13,8 @@ import Footer from "../Footer/Footer";
 import Popup from "../Popup/Popup";
 import SignInForm from "../SignInForm/SignInForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
+import SuccessMessage from "../SuccessMessage/SuccessMessage";
+import Preloader from "../Preloader/Preloader";
 
 import {
   popupContentTypes,
@@ -34,12 +36,13 @@ function App() {
     name: "Elise Bauer",
     email: "elise.bauer@aperturescience.com",
   });
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
-  const [isPopupOpen, setIsPopupOpen] = React.useState(true);
-  const [isPopupVisible, setIsPopupVisible] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isPopupOpen, setIsPopupOpen] = React.useState(false);
+  const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [popupContentType, setPopupContentType] = React.useState(
     popupContentTypes.signIn
   );
+  const [isPreloaderVisible, setIsPreloaderVisible] = React.useState(false);
 
   function handleWindowResize() {
     setWindowSize({
@@ -55,10 +58,16 @@ function App() {
 
   function handleLogin() {
     setIsLoggedIn(true);
+    setIsPopupVisible(false);
+  }
+
+  function handleLoginButton() {
+    setPopupContentType(popupContentTypes.signIn);
+    setIsPopupOpen(true);
   }
 
   function handleSignup() {
-    alert("Signup successful!");
+    setPopupContentType(popupContentTypes.success);
   }
 
   function handleSignupLink() {
@@ -91,7 +100,7 @@ function App() {
         return <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />;
 
       case popupContentTypes.success:
-        return <h2>Registeration successful</h2>;
+        return <SuccessMessage title="Registration successfully completed!" linkCaption="Sign in" onClickLink={handleSigninLink} />;
 
       default:
         return <h2>You shouldn't see this</h2>;
@@ -130,7 +139,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           isMobilePhone={isMobilePhone}
           onLogoutClick={handleLogout}
-          onLoginClick={handleLogin}
+          onLoginClick={handleLoginButton}
         />
         <Switch>
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
@@ -151,6 +160,7 @@ function App() {
         ) : (
           ""
         )}
+        {isPreloaderVisible ? <Preloader /> : ""}
       </div>
     </CurrentUserContext.Provider>
   );

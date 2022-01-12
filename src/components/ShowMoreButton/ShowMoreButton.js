@@ -2,9 +2,13 @@ import "./ShowMoreButton.css";
 
 import Button from "../Button/Button";
 
-function ShowMoreButton(props) {
+function ShowMoreButton({ onClick }) {
+  const buttonClassName = "ShowMoreButton";
+
   return (
-  <Button extraClasses="ShowMoreButton" ariaLabel="show more" onClick={props.onClick}>Show more</Button>
+    <Button className={buttonClassName} ariaLabel="show more" onClick={onClick}>
+      Show more
+    </Button>
   );
 }
 

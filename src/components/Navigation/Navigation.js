@@ -9,40 +9,55 @@ import LoginButton from "../LoginButton/LoginButton";
 import MenuButton from "../MenuButton/MenuButton";
 import { routePaths } from "../../utils/constants";
 
-function Navigation(props) {
+function Navigation({
+  onMenuButtonClick,
+  isLoggedIn,
+  isBackgroundWhite,
+  isMobilePhone,
+  isMenuOpen,
+  onLoginClick,
+  onLogoutClick,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
-  const userName = props.isLoggedIn ? currentUser.name.split(" ")[0] : "";
+  const userName = isLoggedIn ? currentUser.name.split(" ")[0] : "";
   const navigationClasses = `Navigation${
-    props.isBackgroundWhite ? " Navigation_background_white" : ""
+    isBackgroundWhite ? " Navigation_background_white" : ""
   }`;
+  const titleClassName = "Navigation__title";
+  const containerClassName = "Navigation__container";
+  const itemClassName = "Navigation__item";
+  const linkClassName = "Navigation__link";
+  const activeLinkClass = "Navigation__link_active";
+  const homeLinkClass = "Navigation__link_target_home";
+  const savedLinkClass = "Navigation__link_target_saved";
 
   return (
     <nav className={navigationClasses}>
-      <h2 className="Navigation__title">NewsExplorer</h2>
-      {props.isMobilePhone ? (
+      <h2 className={titleClassName}>NewsExplorer</h2>
+      {isMobilePhone ? (
         <MenuButton
-          onClick={props.onMenuButtonClick}
-          isMenuOpen={props.isMenuOpen}
-          isBackgroundWhite={props.isBackgroundWhite}
+          onClick={onMenuButtonClick}
+          isMenuOpen={isMenuOpen}
+          isBackgroundWhite={isBackgroundWhite}
         />
       ) : (
-        <ul className="Navigation__container">
-          <li className="Navigation__item">
+        <ul className={containerClassName}>
+          <li className={itemClassName}>
             <NavLink
               exact
-              className="Navigation__link Navigation__link_target_home"
-              activeClassName="Navigation__link_active"
+              className={`${linkClassName} ${homeLinkClass}`}
+              activeClassName={activeLinkClass}
               to={routePaths.home}
             >
               Home
             </NavLink>
           </li>
-          {props.isLoggedIn ? (
-            <li className="Navigation__item">
+          {isLoggedIn ? (
+            <li className={itemClassName}>
               <NavLink
                 exact
-                className="Navigation__link Navigation__link_target_saved"
-                activeClassName="Navigation__link_active"
+                className={`${linkClassName} ${savedLinkClass}`}
+                activeClassName={activeLinkClass}
                 to={routePaths.savedNews}
               >
                 Saved articles
@@ -51,17 +66,17 @@ function Navigation(props) {
           ) : (
             ""
           )}
-          {props.isLoggedIn ? (
-            <li className="Navigation__item">
+          {isLoggedIn ? (
+            <li className={itemClassName}>
               <SignoutButton
                 userName={userName}
                 ariaLabel="sign out"
-                onClick={props.onLogoutClick}
+                onClick={onLogoutClick}
               />
             </li>
           ) : (
-            <li className="Navigation__item">
-              <LoginButton ariaLabel="sign in" onClick={props.onLoginClick} />
+            <li className={itemClassName}>
+              <LoginButton ariaLabel="sign in" onClick={onLoginClick} />
             </li>
           )}
         </ul>

@@ -2,12 +2,19 @@ import React from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./SavedNewsHeader.css";
 
-function SavedNewsHeader(props) {
+function SavedNewsHeader({ savedArticles }) {
+  const sectionClassName = "SavedNewsHeader";
+  const containerClassName = "SavedNewsHeader__container";
+  const titleClassName = "SavedNewsHeader__title";
+  const subtitleClassName = "SavedNewsHeader__subtitle";
+  const keywordsLabelClass = "SavedNewsHeader__keywords";
+  const keywordsListClass = "SavedNewsHeader__keyword-list";
+
   const currentUser = React.useContext(CurrentUserContext);
   const userName = currentUser.name.split(" ")[0];
-  const numberOfArticles = props.savedArticles.length | "error";
+  const numberOfArticles = savedArticles.length | "error";
   let keywordSet = new Set();
-  props.savedArticles.forEach((article) => {
+  savedArticles.forEach((article) => {
     keywordSet.add(article.keyword);
   });
   const keywords = Array.from(keywordSet);
@@ -27,18 +34,25 @@ function SavedNewsHeader(props) {
       break;
 
     default:
-      keywordString = `${keywords[0]}, ${keywords[1]}, and ${keywords.length - 2} other`;
+      keywordString = `${keywords[0]}, ${keywords[1]}, and ${
+        keywords.length - 2
+      } other`;
   }
 
-  return (<section className="SavedNewsHeader">
-    <div className="SavedNewsHeader__container">
-      <p className="SavedNewsHeader__title">Saved articles</p>
-      <h2 className="SavedNewsHeader__subtitle">{userName}, you have {numberOfArticles} saved articles</h2>
-      <p className="SavedNewsHeader__keywords">
-        By keywords: <span className="SavedNewsHeader__keyword-list">{keywordString}</span>
-      </p>
-    </div>
-  </section>);
+  return (
+    <section className={sectionClassName}>
+      <div className={containerClassName}>
+        <p className={titleClassName}>Saved articles</p>
+        <h2 className={subtitleClassName}>
+          {userName}, you have {numberOfArticles} saved articles
+        </h2>
+        <p className={keywordsLabelClass}>
+          By keywords:{" "}
+          <span className={keywordsListClass}>{keywordString}</span>
+        </p>
+      </div>
+    </section>
+  );
 }
 
 export default SavedNewsHeader;

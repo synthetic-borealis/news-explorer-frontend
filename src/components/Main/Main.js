@@ -6,11 +6,15 @@ import AboutSection from "../AboutSection/AboutSection";
 
 import { articles } from "../../utils/constants";
 
-function Main(props) {
+function Main({ isLoggedIn, onCardButtonClick }) {
   return (
     <main>
       <SearchSection />
-      <SearchResults currentResults={articles} isLoggedIn={props.isLoggedIn} onCardButtonClick={props.onCardButtonClick} />
+      <SearchResults
+        currentResults={articles}
+        isLoggedIn={isLoggedIn}
+        onCardButtonClick={onCardButtonClick}
+      />
       <AboutSection />
     </main>
   );

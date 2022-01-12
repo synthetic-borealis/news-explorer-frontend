@@ -11,7 +11,7 @@ function SignoutButton(props) {
   const buttonClasses = `SignoutButton${location.pathname === routePaths.savedNews ? " SignoutButton_background_white" : ""}`;
 
   return (
-    <Button extraClasses={buttonClasses} onClick={props.onClick}>
+    <Button className={buttonClasses} onClick={props.onClick}>
       <p className="SignoutButton__label">{props.userName}</p>
       <img src={logoutIcon} className="SignoutButton__icon" alt="signout" />
     </Button>

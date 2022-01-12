@@ -5,7 +5,7 @@ import CredentialsForm from "../CredentialsForm/CredentialsForm";
 import FormInput from "../FormInput/FormInput";
 import { useStateObject } from "../../hooks/state-object";
 
-function SignInForm({ onSignIn, onClickLink, ...props }) {
+function SignInForm({ onSignIn, onClickLink }) {
   const formClassName = "SignInForm";
   const inputClassName = "SignInForm__input";
   const emailInputId = "signin-email-input";
@@ -18,7 +18,6 @@ function SignInForm({ onSignIn, onClickLink, ...props }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    alert("Singing in");
     if (typeof onSignIn === "function") {
       onSignIn();
     }

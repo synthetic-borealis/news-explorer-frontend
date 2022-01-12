@@ -7,49 +7,59 @@ import githubIcon from "../../images/icons/icon-github.svg";
 import instagramIcon from "../../images/icons/icon-instagram.svg";
 
 function Footer() {
+  const footerClassName = "Footer";
+  const navClassName = "Footer__container";
+  const copyrightClassName = "Footer__copyright";
+  const linkContainerClass = "Footer__links";
+  const linkWrapperClass = "Footer__link-item";
+  const linkClassName = "Footer__link";
+  const iconContainerClass = "Footer__icon-links";
+  const iconWrapperClass = "Footer__icon-link";
+  const iconClassName = "Footer__icon";
+
   return (
-    <footer className="Footer">
-      <nav className="Footer__container">
-        <p className="Footer__copyright">
+    <footer className={footerClassName}>
+      <nav className={navClassName}>
+        <p className={copyrightClassName}>
           © 2022 Supersite, Powered by News API
         </p>
-        <ul className="Footer__links">
-          <li className="Footer__link-item">
-            <Link to={routePaths.home} className="Footer__link">
+        <ul className={linkContainerClass}>
+          <li className={linkWrapperClass}>
+            <Link to={routePaths.home} className={linkClassName}>
               Home
             </Link>
           </li>
-          <li className="Footer__link-item">
+          <li className={linkWrapperClass}>
             <a
               href="https://practicum.yandex.com/"
-              className="Footer__link"
+              className={linkClassName}
               target="_blank"
               rel="noreferrer"
             >
               Practicum by Yandex
             </a>
           </li>
-          <li className="Footer__link-item">
-            <ul className="Footer__icon-links">
-              <li className="Footer__icon-link">
+          <li className={linkWrapperClass}>
+            <ul className={iconContainerClass}>
+              <li className={iconWrapperClass}>
                 <a
                   href="https://github.com/synthetic-borealis"
-                  className="Footer__link"
+                  className={linkClassName}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img className="Footer__icon" src={githubIcon} alt="github" />
+                  <img className={iconClassName} src={githubIcon} alt="github" />
                 </a>
               </li>
-              <li className="Footer__icon-link">
+              <li className={iconWrapperClass}>
                 <a
                   href="https://www.instagram.com/hasarius/"
-                  className="Footer__link"
+                  className={linkClassName}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <img
-                    className="Footer__icon"
+                    className={iconClassName}
                     src={instagramIcon}
                     alt="instagram"
                   />
