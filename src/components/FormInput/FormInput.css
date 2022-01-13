@@ -22,7 +22,7 @@
   display: block;
   width: 100%;
   border: 0;
-  padding: 0 0 10px 0;
+  padding: 0 0 10px 2px;
   font-family: "Inter", sans-serif;
   font-size: 14px;
   line-height: 1.21;
@@ -37,6 +37,7 @@
 
 .FormInput__input:focus {
   outline: 0;
+  box-shadow: -1px -2px 4px rgba(14, 26, 57, 0.2);
 }
 
 .FormInput__error {
