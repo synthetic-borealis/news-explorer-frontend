@@ -1,0 +1,42 @@
+.SuccessMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: calc(360 / 430 * 100%);
+  max-width: 360px;
+  margin: 43px auto 51px;
+  box-sizing: border-box;
+}
+
+.SuccessMessage__title {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  line-height: 1.17;
+  font-weight: 900;
+  color: black;
+  padding: 0;
+  margin: 0 0 14px 0;
+  text-align: left;
+}
+
+.SuccessMessage__link {
+  display: inline;
+  width: max-content;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  line-height: 1.22;
+  font-weight: 400;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: 0;
+  color: #2f71e5;
+  cursor: pointer;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.SuccessMessage__link:hover {
+  opacity: 0.6;
+}

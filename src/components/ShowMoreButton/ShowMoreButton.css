@@ -1,0 +1,35 @@
+.ShowMoreButton {
+  align-self: center;
+  margin-top: 56px;
+  border-radius: 80px;
+  min-width: 288px;
+  min-height: 64px;
+  color: #1a1b22;
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  font-weight: 500;
+  transition: background-color .2s ease-in-out, opacity .2s ease-in-out;
+}
+
+@media screen and (max-width: 1044px) {
+  .ShowMoreButton {
+    margin-top: 32px;
+    padding: 16px 74px;
+    min-height: 56px;
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .ShowMoreButton {
+    padding: 16px 98px;
+    margin-top: 21px;
+  }
+}
+
+.ShowMoreButton:hover {
+  background-color: #E8E8E8;
+  opacity: 0.9;
+}

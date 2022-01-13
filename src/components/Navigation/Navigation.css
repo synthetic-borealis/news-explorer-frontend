@@ -1,0 +1,126 @@
+.Navigation {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(1232 / 1440 * 100%);
+  max-width: 1232px;
+}
+
+.Navigation__title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Slab", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.Navigation__container {
+  display: flex;
+  list-style-type: none;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.Navigation__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-left: 30px;
+}
+
+.Navigation__item:last-of-type {
+  margin-left: 34px;
+}
+
+.Navigation__link {
+  position: relative;
+  display: inline;
+  color: #b6bcbf;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  font-weight: 500;
+}
+
+.Navigation__link_target_home {
+  padding: 0 18px;
+}
+
+.Navigation__link_target_saved {
+  padding: 0 28px;
+}
+
+.Navigation__link_active {
+  color: white;
+}
+
+.Navigation__link_active::after {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: calc(100% + 25px);
+  content: "";
+  border-bottom: 3px solid white;
+}
+
+.Navigation_background_white .Navigation__link {
+  color: #1a1b22;
+}
+
+
+.Navigation_background_white .Navigation__link_active::after {
+  border-color: #1a1b22;
+}
+
+/* Tablets */
+@media screen and (max-width: 1044px) {
+  .Navigation {
+    width: calc(688 / 768 * 100%);
+    max-width: 768px;
+  }
+
+  .Navigation__item {
+    margin-left: 16px;
+  }
+
+  .Navigation__item:last-of-type {
+    margin-left: 14px;
+  }
+
+  .Navigation__link {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .Navigation__link_target_home {
+    padding: 0 10px;
+  }
+
+  .Navigation__link_target_saved {
+    padding: 0 30px;
+  }
+
+
+  .Navigation__link_active::after {
+    height: calc(100% + 18px);
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .Navigation {
+    width: calc(288 / 320 * 100%);
+    max-width: 288px;
+  }
+
+  .Navigation__title {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}

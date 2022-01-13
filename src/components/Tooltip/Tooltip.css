@@ -1,0 +1,17 @@
+.Tooltip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.Tooltip__caption {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  line-height: 1.16;
+  font-weight: 400;
+  text-align: center;
+}

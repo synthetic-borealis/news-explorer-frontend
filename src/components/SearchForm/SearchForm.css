@@ -1,0 +1,108 @@
+.SearchForm {
+  position: relative;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 88px auto 80px;
+  background-color: white;
+  width: 100%;
+  border-radius: 100px;
+}
+
+.SearchForm__input {
+  display: inline-block;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  line-height: 1.37;
+  font-weight: 400;
+  min-height: 64px;
+  width: calc(440 / 608 * 100%);
+  max-width: 440px;
+  padding-left: 24px;
+  border-radius: 100px 0 0 100px;
+  border: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.SearchForm__input:focus {
+  outline: 0;
+}
+
+.SearchForm__input::placeholder,
+.SearchForm__input::-moz-placeholder,
+.SearchForm__input::-webkit-input-placeholder {
+  color: #b6bcbf;
+}
+
+.SearchForm__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 64px;
+  width: calc(168 / 608 * 100%);
+  max-width: 168px;
+  min-width: max-content;
+  padding: 20px 56px;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  background-color: #2f71e5;
+  transition: background-color 0.2s linear;
+}
+
+.SearchForm__button:hover {
+  background-color: #347EFF;
+}
+
+.SearchForm__button:active {
+  background-color: #2A65CC;
+}
+
+.SearchForm__button-label {
+  padding: 0;
+  display: block;
+  min-width: 56px;
+}
+
+@media screen and (max-width: 1044px) {
+  .SearchForm {
+    margin: 48px auto;
+  }
+
+  .SearchForm__input {
+    width: calc(288 / 448 * 100%);
+    min-height: 56px;
+    max-width: 288px;
+  }
+
+  .SearchForm__button {
+    width: calc(160 / 448 * 100%);
+    max-width: 160px;
+    min-height: 56px;
+    padding: 16px 52px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .SearchForm {
+    margin-top: 122px;
+    flex-direction: column;
+    border-radius: 0;
+    background-color: transparent;
+    margin-bottom: 32px;
+  }
+
+  .SearchForm__input {
+    width: 100%;
+    max-width: 288px;
+    padding: 17px 16px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  .SearchForm__button {
+    width: 100%;
+    max-width: 288px;
+    padding: 16px 116px;
+  }
+}

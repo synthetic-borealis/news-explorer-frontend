@@ -1,0 +1,23 @@
+.MenuButton {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../images/icons/icon-menu.svg");
+}
+
+.MenuButton_open {
+  background-image: url("../../images/icons/icon-close.svg");
+}
+
+.MenuButton_background_white {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(13%) saturate(535%)
+    hue-rotate(195deg) brightness(97%) contrast(104%);
+}
