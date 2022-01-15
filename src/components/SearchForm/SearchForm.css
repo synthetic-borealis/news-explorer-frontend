@@ -20,7 +20,7 @@
   width: calc(440 / 608 * 100%);
   max-width: 440px;
   padding-left: 24px;
-  border-radius: 100px 0 0 100px;
+  border-radius: 100px;
   border: 0;
   height: 100%;
   box-sizing: border-box;
@@ -28,6 +28,7 @@
 
 .SearchForm__input:focus {
   outline: 0;
+  box-shadow: -1px 2px 8px rgba(14, 26, 57, 0.5);
 }
 
 .SearchForm__input::placeholder,
