@@ -5,12 +5,14 @@ import React from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
+import NoResultsFound from "../NoResultsFound/NoResultsFound";
 
 function SearchResults({ isLoggedIn, currentResults, onCardButtonClick }) {
   const [numberOfCards, setNumberOfCards] = React.useState(3);
   const sectionClassName = "SearchResults";
   const containerClassName = "SearchResuls__container";
   const titleClassName = "SearchResults__title";
+  const searchKeyword = "Dogs";
 
   const currentCards =
     currentResults.length > 0 ? currentResults.slice(0, numberOfCards) : [];
@@ -29,16 +31,20 @@ function SearchResults({ isLoggedIn, currentResults, onCardButtonClick }) {
     <section className={sectionClassName}>
       <div className={containerClassName}>
         <h2 className={titleClassName}>Search results</h2>
-        <NewsCardList>
-          {currentCards.map((card, index) => (
-            <NewsCard
-              key={index}
-              cardData={card}
-              isLoggedIn={isLoggedIn}
-              onButtonClick={() => onCardButtonClick(card)}
-            />
-          ))}
-        </NewsCardList>
+        {currentResults.length === 0 ? (
+          <NoResultsFound keyword={searchKeyword} />
+        ) : (
+          <NewsCardList>
+            {currentCards.map((card, index) => (
+              <NewsCard
+                key={index}
+                cardData={card}
+                isLoggedIn={isLoggedIn}
+                onButtonClick={() => onCardButtonClick(card)}
+              />
+            ))}
+          </NewsCardList>
+        )}
         {cardNumberDifference > 0 ? (
           <ShowMoreButton onClick={handleShowMore} />
         ) : (
