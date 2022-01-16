@@ -99,13 +99,34 @@ function App() {
   }
 
   function handleSaveCard(cardData) {
-    auth.addArticle({...cardData}, jwt)
+    auth
+      .addArticle({ ...cardData }, jwt)
       .then((res) => setSavedArticles([res, ...savedArticles]))
       .catch(console.log);
   }
 
   function handleDeleteCard(cardData) {
-    alert("Deleting card");
+    let cardId = cardData._id;
+    // Save button is clicked twice
+    if (!cardId) {
+      const foundArticle = savedArticles.find(
+        (article) =>
+          article.link === cardData.url || article.link === cardData.link
+      );
+      if (foundArticle) {
+        cardId = foundArticle._id;
+      }
+    }
+    if (cardId) {
+      auth
+        .deleteArticle(cardId, jwt)
+        .then(() => {
+          setSavedArticles(
+            savedArticles.filter((element) => element._id !== cardId)
+          );
+        })
+        .catch(console.log);
+    }
   }
 
   function handlePopupClose() {
@@ -203,13 +224,15 @@ function App() {
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
             <SavedNews
               savedArticles={savedArticles}
-              onCardButtonClick={handleDeleteCard}
+              onCardDeleteClick={handleDeleteCard}
+              isLoggedIn={isLoggedIn}
             />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
             <Main
               isLoggedIn={isLoggedIn}
               onCardSaveClick={handleSaveCard}
+              onCardDeleteClick={handleDeleteCard}
               searchResults={searchResults}
               showSearchResults={showSearchResults}
               savedArticles={savedArticles}

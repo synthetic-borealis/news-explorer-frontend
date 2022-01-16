@@ -4,7 +4,7 @@ import SearchSection from "../SearchSection/SearchSection";
 import SearchResults from "../SearchResults/SearchResults";
 import AboutSection from "../AboutSection/AboutSection";
 
-function Main({ isLoggedIn, onCardSaveClick, savedArticles, keyword, searchResults, showSearchResults = false }) {
+function Main({ isLoggedIn, onCardSaveClick, onCardDeleteClick, savedArticles, keyword, searchResults, showSearchResults = false }) {
   return (
     <main>
       <SearchSection />
@@ -13,6 +13,7 @@ function Main({ isLoggedIn, onCardSaveClick, savedArticles, keyword, searchResul
         <SearchResults
           isLoggedIn={isLoggedIn}
           onSaveClick={onCardSaveClick}
+          onDeleteClick={onCardDeleteClick}
           savedArticles={savedArticles}
           searchResults={searchResults}
           keyword={keyword}

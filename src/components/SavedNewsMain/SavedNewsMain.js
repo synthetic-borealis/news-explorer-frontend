@@ -3,7 +3,7 @@ import "./SavedNewsMain.css";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NewsCard from "../NewsCard/NewsCard";
 
-function SavedNewsMain({ savedArticles, isLoggedIn, onCardButtonClick }) {
+function SavedNewsMain({ savedArticles, isLoggedIn, onDeleteClick }) {
   const sectionClassName = "SavedNewsMain";
   const containerClassName = "SavedNewsMain__container";
 
@@ -16,7 +16,7 @@ function SavedNewsMain({ savedArticles, isLoggedIn, onCardButtonClick }) {
               key={card._id}
               cardData={card}
               isLoggedIn={isLoggedIn}
-              onButtonClick={() => onCardButtonClick(card)}
+              onDeleteClick={onDeleteClick}
             />
           ))}
         </NewsCardList>

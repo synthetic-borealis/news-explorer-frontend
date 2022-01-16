@@ -3,7 +3,7 @@ import "./SavedNews.css";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNewsMain from "../SavedNewsMain/SavedNewsMain";
 
-function SavedNews({ savedArticles, onCardButtonClick }) {
+function SavedNews({ savedArticles, onCardDeleteClick, isLoggedIn }) {
   const sectionClassName = "SavedNews";
 
   return (
@@ -11,7 +11,8 @@ function SavedNews({ savedArticles, onCardButtonClick }) {
       <SavedNewsHeader savedArticles={savedArticles} />
       <SavedNewsMain
         savedArticles={savedArticles}
-        onCardButtonClick={onCardButtonClick}
+        onDeleteClick={onCardDeleteClick}
+        isLoggedIn={isLoggedIn}
       />
     </main>
   );

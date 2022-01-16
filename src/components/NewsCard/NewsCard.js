@@ -71,15 +71,19 @@ function NewsCard({ isLoggedIn, cardData, keyword, onSaveClick, onDeleteClick, i
 
   const handleCardDelete = () => {
     if (isLoggedIn) {
-      // onDeleteClick
+      onDeleteClick(cardData);
     }
   }
 
   const handleButtonClick = () => {
-    if (location.pathname === routePaths.home && !isSaved) {
-      handleCardSave();
+    if (location.pathname === routePaths.home) {
+      if (isSaved) {
+        handleCardDelete();
+      } else {
+        handleCardSave();
+      }
     } else if (location.pathname === routePaths.savedNews) {
-      // Delete
+      handleCardDelete();
     }
   };
 

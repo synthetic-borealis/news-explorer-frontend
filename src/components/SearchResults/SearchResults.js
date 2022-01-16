@@ -7,7 +7,7 @@ import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import NoResultsFound from "../NoResultsFound/NoResultsFound";
 
-function SearchResults({ isLoggedIn, searchResults, savedArticles, onSaveClick, keyword = "" }) {
+function SearchResults({ isLoggedIn, searchResults, savedArticles, onSaveClick, onDeleteClick, keyword = "" }) {
   const [numberOfCards, setNumberOfCards] = React.useState(3);
   const sectionClassName = "SearchResults";
   const containerClassName = "SearchResuls__container";
@@ -50,6 +50,7 @@ function SearchResults({ isLoggedIn, searchResults, savedArticles, onSaveClick, 
                 cardData={card}
                 isLoggedIn={isLoggedIn}
                 onSaveClick={onSaveClick}
+                onDeleteClick={onDeleteClick}
                 isSaved={isArticleSaved(card)}
                 keyword={keyword}
               />
