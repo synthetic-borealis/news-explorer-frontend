@@ -35,6 +35,10 @@ function FormInput({
 
     if (type === "email" && validator.isEmail(evt.target.value) && isThrowawayEmail(evt.target.value)) {
       evt.target.setCustomValidity("Please use a non-throwaway e-mail.");
+    } else if (type === "email" && !validator.isEmail(evt.target.value)) {
+      // Some e-mail addresses are considered valid by browsers' builtin validation
+      // but not by validator
+      evt.target.setCustomValidity("Please enter an email address.");
     } else {
       evt.target.setCustomValidity("");
     }

@@ -31,20 +31,17 @@ const maxMobileWidth = 680;
 const articles = [
   {
     keyword: "Finance",
-    source: {
-      id: "business-insider",
-      name: "Business Insider",
-    },
+    source: "Business Insider",
     author: "prosen@insider.com (Phil Rosen)",
     title: "10 things before the opening bell",
     description:
       "The Great Resignation continues on with new job data, Goldman Sachs named their top stock picks for 2022, and Cathie Wood dumps more Tesla stock.",
-    url: "https://www.businessinsider.com/10-things-before-the-opening-bell-january-5-2022-1",
-    urlToImage:
+    link: "https://www.businessinsider.com/10-things-before-the-opening-bell-january-5-2022-1",
+    image:
       "https://i.insider.com/61a4b96e1ca528001811999c?width=1200&format=jpeg",
-    publishedAt: "2022-01-05T11:32:52Z",
-    content:
-      "Welcome to 10 Things Before the Opening Bell.\r\nIf this was forwarded to you, sign up here. Plus, download Insider's app for news on the go click here for iOS andhere for Android.\r\nLet's jump in. \r\n1.… [+3214 chars]",
+    date: "2022-01-05T11:32:52Z",
+    text:
+      "Welcome to 10 Things Before the Opening Bell.\r\nIf this was forwarded to you, sign up here. Plus, download Insider's app for news on the go click here for iOS andhere for Android.\r\nLet's jump in. \r\n1.…",
   },
   {
     keyword: "Crypto",
@@ -240,4 +237,33 @@ const articles = [
   },
 ];
 
-export { routePaths, monthNames, popupContentTypes, maxMobileWidth, articles };
+const errorMessages = {
+  badCredentials: "Unknown e-mail or password",
+  otherError: "Unknown error",
+};
+
+const authApiOptions = {
+  baseUrl: "http://localhost:4000",
+  baseHeaders: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+};
+
+const authApiRoutes = {
+  signup: "/signup",
+  signin: "/signin",
+  articles: "/articles",
+  getUserInfo: "/users/me",
+};
+
+export {
+  routePaths,
+  monthNames,
+  popupContentTypes,
+  maxMobileWidth,
+  articles,
+  errorMessages,
+  authApiOptions,
+  authApiRoutes,
+};

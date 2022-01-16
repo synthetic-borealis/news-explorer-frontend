@@ -16,11 +16,12 @@ import SignUpForm from "../SignUpForm/SignUpForm";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import Preloader from "../Preloader/Preloader";
 
+import * as auth from "../../utils/api/auth";
+
 import {
   popupContentTypes,
   routePaths,
   maxMobileWidth,
-  articles,
 } from "../../utils/constants";
 
 function App() {
@@ -32,17 +33,19 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  const [currentUser, setCurrentUser] = React.useState({
-    name: "Elise Bauer",
-    email: "elise.bauer@aperturescience.com",
-  });
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [popupContentType, setPopupContentType] = React.useState(
     popupContentTypes.signIn
   );
   const [isPreloaderVisible, setIsPreloaderVisible] = React.useState(false);
+  const [jwt, setJwt] = React.useState(
+    localStorage.getItem("jwt") ? localStorage.getItem("jwt") : ""
+  );
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [savedArticles, setSavedArticles] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState([]);
 
   function handleWindowResize() {
     setWindowSize({
@@ -52,13 +55,33 @@ function App() {
   }
 
   function handleLogout() {
+    // Remove token from local storage
+    localStorage.removeItem("jwt");
+    setJwt("");
+    // Set isLoggedIn to false
     setIsLoggedIn(false);
+    // Set currentUser to an empty object
+    setCurrentUser({});
+    // Set savedArticles to an empty array
+    setSavedArticles([]);
+    // Push home route to history
     history.push(routePaths.home);
   }
 
-  function handleLogin() {
-    setIsLoggedIn(true);
-    setIsPopupVisible(false);
+  function handleLogin({ email, password }) {
+    return auth
+      .signin({ email, password })
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('jwt', res.token);
+          setJwt(res.token);
+          auth.getUserInfo(res.token).then((res) => {
+            setCurrentUser(res.data);
+            setIsLoggedIn(true);
+            setIsPopupVisible(false);
+          });
+        }
+      });
   }
 
   function handleLoginButton() {
@@ -66,7 +89,7 @@ function App() {
     setIsPopupOpen(true);
   }
 
-  function handleSignup() {
+  function handleSignup({email, password, name}) {
     setPopupContentType(popupContentTypes.success);
   }
 
@@ -79,7 +102,10 @@ function App() {
   }
 
   function handleSaveCard(cardData) {
-    alert("Saving card");
+    // Check if article with the same URL already exists in saved articles
+    // If not, send request to save it
+    console.log("Saved article");
+    console.log(cardData);
   }
 
   function handleDeleteCard(cardData) {
@@ -94,13 +120,23 @@ function App() {
   function renderPopupContent() {
     switch (popupContentType) {
       case popupContentTypes.signIn:
-        return <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />;
+        return (
+          <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />
+        );
 
       case popupContentTypes.signUp:
-        return <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />;
+        return (
+          <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />
+        );
 
       case popupContentTypes.success:
-        return <SuccessMessage title="Registration successfully completed!" linkCaption="Sign in" onClickLink={handleSigninLink} />;
+        return (
+          <SuccessMessage
+            title="Registration successfully completed!"
+            linkCaption="Sign in"
+            onClickLink={handleSigninLink}
+          />
+        );
 
       default:
         return <h2>You shouldn't see this</h2>;
@@ -108,12 +144,25 @@ function App() {
   }
 
   React.useEffect(() => {
+    console.log("Mounting App component");
+    if (jwt.length > 0) {
+      auth.getUserInfo(jwt)
+        .then((res) => {
+          setCurrentUser(res.data);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => {
+          localStorage.removeItem("jwt");
+          setJwt("");
+          console.log(err);
+        });
+    }
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
   React.useEffect(() => {
-    setIsMobilePhone((windowSize.width <= maxMobileWidth));
+    setIsMobilePhone(windowSize.width <= maxMobileWidth);
   }, [windowSize]);
 
   React.useEffect(() => {
@@ -123,6 +172,18 @@ function App() {
       setPopupContentType(popupContentTypes.signIn);
     }
   }, [isPopupOpen]);
+
+  React.useEffect(() => {
+    if (isLoggedIn) {
+      setIsPreloaderVisible(true);
+      auth.getArticles(jwt)
+        .then((res) => {
+          setSavedArticles(res.data);
+        })
+        .catch(console.log)
+        .finally(() => setIsPreloaderVisible(false));
+    }
+  }, [isLoggedIn]);
 
   React.useEffect(() => {
     const popupTransitionDelay = 0.25;
@@ -144,7 +205,7 @@ function App() {
         <Switch>
           <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
             <SavedNews
-              savedArticles={articles}
+              savedArticles={savedArticles}
               onCardButtonClick={handleDeleteCard}
             />
           </ProtectedRoute>

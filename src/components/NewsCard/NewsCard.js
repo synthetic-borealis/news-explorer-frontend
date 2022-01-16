@@ -8,12 +8,17 @@ import TagBubble from "../TagBubble/TagBubble";
 
 import { monthNames, routePaths } from "../../utils/constants";
 
-function NewsCard({ isLoggedIn, cardData, onButtonClick }) {
+function NewsCard({ isLoggedIn, cardData, keyword = "", onButtonClick }) {
   const [isSaved, setIsSaved] = React.useState(false); // TODO remove this line when News API functionality is implemented
   const location = useLocation();
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
-  const cardImage = `url(${cardData.urlToImage})`;
-  const cardDate = new Date(cardData.publishedAt);
+
+  const articleSource = typeof cardData.source === "string" ? cardData.source : cardData.source.name;
+  const articleText = typeof cardData.text === "string" ? cardData.text : cardData.content.split("[")[0];
+  const articleLink = typeof cardData.link === "string" ? cardData.link : cardData.url;
+  const articleImage = typeof cardData.image === "string" ? cardData.image : cardData.urlToImage;
+  const cardImage = `url(${articleImage})`;
+  const cardDate = new Date(cardData.date ? cardData.date : cardData.publishedAt);
   const dateString = `${
     monthNames[cardDate.getMonth()]
   } ${cardDate.getDate()}, ${cardDate.getFullYear()}`;
@@ -39,7 +44,7 @@ function NewsCard({ isLoggedIn, cardData, onButtonClick }) {
   }`;
 
   const tagBubbleClasses = "NewsCard__tag-bubble";
-  const tagBubbleCaption = cardData.keyword ? cardData.keyword : "";
+  const tagBubbleCaption = cardData.keyword ? cardData.keyword : keyword;
 
   const handleButtonMouseEnter = () => {
     setIsTooltipVisible(true);
@@ -50,8 +55,20 @@ function NewsCard({ isLoggedIn, cardData, onButtonClick }) {
   };
 
   const handleButtonClick = () => {
-    setIsSaved(!isSaved); // TODO remove this line when News API functionality is implemented (?)
-    onButtonClick();
+    if (isLoggedIn) {
+      const articleData = {
+        keyword,
+        title: cardData.title,
+        text: articleText,
+        date: cardData.publishedAt,
+        source: cardData.source.name,
+        link: cardData.url,
+      };
+      // setIsSaved(!isSaved); // TODO remove this line when News API functionality is implemented (?)
+      onButtonClick(articleData);
+    } else {
+      alert("Please log in to save articles");
+    }
   };
 
   return (
@@ -64,11 +81,11 @@ function NewsCard({ isLoggedIn, cardData, onButtonClick }) {
       <div className={containerClassName}>
         <p className={dateClassName}>{dateString}</p>
         <h3 className={titleClassName}>{cardData.title}</h3>
-        <p className={contentClassName}>{cardData.content.split("[")[0]}</p>
-        <p className={sourceClassName}>{cardData.source.name}</p>
+        <p className={contentClassName}>{articleText}</p>
+        <p className={sourceClassName}>{articleSource}</p>
       </div>
       <a
-        href={cardData.url}
+        href={articleLink}
         className={linkClassName}
         target="_blank"
         rel="noreferrer"

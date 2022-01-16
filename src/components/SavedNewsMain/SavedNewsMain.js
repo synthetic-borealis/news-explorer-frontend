@@ -11,9 +11,9 @@ function SavedNewsMain({ savedArticles, isLoggedIn, onCardButtonClick }) {
     <section className={sectionClassName}>
       <div className={containerClassName}>
         <NewsCardList>
-          {savedArticles.map((card, index) => (
+          {savedArticles.map((card) => (
             <NewsCard
-              key={index}
+              key={card._id}
               cardData={card}
               isLoggedIn={isLoggedIn}
               onButtonClick={() => onCardButtonClick(card)}
