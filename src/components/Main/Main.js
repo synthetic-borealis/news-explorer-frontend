@@ -4,10 +4,10 @@ import SearchSection from "../SearchSection/SearchSection";
 import SearchResults from "../SearchResults/SearchResults";
 import AboutSection from "../AboutSection/AboutSection";
 
-function Main({ isLoggedIn, onCardSaveClick, onCardDeleteClick, savedArticles, keyword, searchResults, showSearchResults = false }) {
+function Main({ isLoggedIn, onCardSaveClick, onCardDeleteClick, onSearch, savedArticles, keyword, searchResults, showSearchResults = false }) {
   return (
     <main>
-      <SearchSection />
+      <SearchSection onSearch={onSearch} />
       {
         showSearchResults ?
         <SearchResults

@@ -129,6 +129,10 @@ function App() {
     }
   }
 
+  function handleSearch(query) {
+    console.log(query);
+  }
+
   function handlePopupClose() {
     setIsPopupVisible(false);
     setIsPopupOpen(false);
@@ -231,6 +235,7 @@ function App() {
           <Route exact path={routePaths.home}>
             <Main
               isLoggedIn={isLoggedIn}
+              onSearch={handleSearch}
               onCardSaveClick={handleSaveCard}
               onCardDeleteClick={handleDeleteCard}
               searchResults={searchResults}

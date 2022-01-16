@@ -70,6 +70,7 @@ function FormInput({
         minLength={minLength}
         maxLength={maxLength}
         autoComplete={autoComplete}
+        {...({"aria-label": name})}
       />
       <span className={errorLabelClassName}>{errorMessage}</span>
     </label>
