@@ -22,9 +22,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "lint:log": "eslint src > lint.log",
-    "gen-blacklist": "node util_scripts/generate-domain-blacklist.mjs",
-    "init-ssh": "ssh-agent -s && ssh-add",
-    "deploy": "npm run build && scp -r -i ~/.ssh/id_rsa ./build/* snip.coloured@the-news-explorer.tk:/home/snip.coloured/news-explorer-frontend"
+    "gen-blacklist": "node util_scripts/generate-domain-blacklist.mjs"
   },
   "eslintConfig": {
     "extends": [
