@@ -1,9 +1,11 @@
 import "./SavedNews.css";
 
+import React from "react";
+
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader";
 import SavedNewsMain from "../SavedNewsMain/SavedNewsMain";
 
-function SavedNews({ savedArticles, onCardDeleteClick, isLoggedIn }) {
+function SavedNews({ savedArticles, onCardDeleteClick }) {
   const sectionClassName = "SavedNews";
 
   return (
@@ -12,7 +14,6 @@ function SavedNews({ savedArticles, onCardDeleteClick, isLoggedIn }) {
       <SavedNewsMain
         savedArticles={savedArticles}
         onDeleteClick={onCardDeleteClick}
-        isLoggedIn={isLoggedIn}
       />
     </main>
   );

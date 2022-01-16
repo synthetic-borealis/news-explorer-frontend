@@ -7,23 +7,21 @@ import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import NoResultsFound from "../NoResultsFound/NoResultsFound";
 
-function SearchResults({ isLoggedIn, searchResults, savedArticles, onSaveClick, onDeleteClick, keyword = "" }) {
-  const [numberOfCards, setNumberOfCards] = React.useState(3);
+function SearchResults({ isLoggedIn, searchResults, numberOfCards, savedArticles, onSaveClick, onDeleteClick, keyword = "" }) {
   const sectionClassName = "SearchResults";
   const containerClassName = "SearchResuls__container";
   const titleClassName = "SearchResults__title";
-  const searchKeyword = "Dogs";
 
   const currentCards =
-    searchResults.length > 0 ? searchResults.slice(0, numberOfCards) : [];
-  const cardNumberDifference = searchResults.length - numberOfCards;
+    searchResults.length > 0 ? searchResults.slice(0, numberOfCards.value) : [];
+  const cardNumberDifference = searchResults.length - numberOfCards.value;
 
   function handleShowMore() {
-    if (numberOfCards >= searchResults.length) return;
+    if (numberOfCards.value >= searchResults.length) return;
     if (cardNumberDifference > 3) {
-      setNumberOfCards(numberOfCards + 3);
+      numberOfCards.setValue(numberOfCards.value + 3);
     } else {
-      setNumberOfCards(numberOfCards + cardNumberDifference);
+      numberOfCards.setValue(numberOfCards.value + cardNumberDifference);
     }
   }
 
@@ -41,7 +39,7 @@ function SearchResults({ isLoggedIn, searchResults, savedArticles, onSaveClick, 
       <div className={containerClassName}>
         <h2 className={titleClassName}>Search results</h2>
         {searchResults.length === 0 ? (
-          <NoResultsFound keyword={searchKeyword} />
+          <NoResultsFound keyword={keyword} />
         ) : (
           <NewsCardList>
             {currentCards.map((card, index) => (

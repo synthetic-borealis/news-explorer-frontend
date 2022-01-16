@@ -16,13 +16,14 @@ import SignUpForm from "../SignUpForm/SignUpForm";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
 import Preloader from "../Preloader/Preloader";
 
-import * as auth from "../../utils/api/auth";
+import * as auth from "../../utils/api/MainApi";
+import * as newsApi from "../../utils/api/NewsApi";
 
 import {
   popupContentTypes,
   routePaths,
   maxMobileWidth,
-  articles,
+  searchStorageKeys,
 } from "../../utils/constants";
 
 function App() {
@@ -43,11 +44,21 @@ function App() {
   const [jwt, setJwt] = React.useState(
     localStorage.getItem("jwt") ? localStorage.getItem("jwt") : ""
   );
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState();
   const [savedArticles, setSavedArticles] = React.useState([]);
-  const [searchResults, setSearchResults] = React.useState(articles);
-  const [showSearchResults, setShowSearchResults] = React.useState(true);
+  const [searchResults, setSearchResults] = React.useState(
+    localStorage.getItem(searchStorageKeys.results)
+      ? JSON.parse(localStorage.getItem(searchStorageKeys.results))
+      : []
+  );
+
+  const [keyword, setKeyword] = React.useState(
+    localStorage.getItem(searchStorageKeys.keyword)
+      ? localStorage.getItem(searchStorageKeys.keyword)
+      : ""
+  );
+  const [showSearchResults, setShowSearchResults] = React.useState(false);
+  const [numberOfCards, setNumberOfCards] = React.useState(3);
 
   function handleWindowResize() {
     setWindowSize({
@@ -59,9 +70,10 @@ function App() {
   function handleLogout() {
     localStorage.removeItem("jwt");
     setJwt("");
-    setIsLoggedIn(false);
-    setCurrentUser({});
+    setCurrentUser();
     setSavedArticles([]);
+    setSearchResults([]);
+    setShowSearchResults(false);
     history.push(routePaths.home);
   }
 
@@ -72,7 +84,6 @@ function App() {
         setJwt(res.token);
         auth.getUserInfo(res.token).then((res) => {
           setCurrentUser(res.data);
-          setIsLoggedIn(true);
           setIsPopupVisible(false);
         });
       }
@@ -130,7 +141,18 @@ function App() {
   }
 
   function handleSearch(query) {
-    console.log(query);
+    setNumberOfCards(3);
+    setKeyword(query);
+    setIsPreloaderVisible(true);
+    newsApi
+      .search(query)
+      .then((res) => {
+        setSearchResults(res.articles);
+        // localStorage.setItem(searchStorageKeys.results, searchResults);
+        setShowSearchResults(true);
+      })
+      .catch(console.log)
+      .finally(() => setIsPreloaderVisible(false));
   }
 
   function handlePopupClose() {
@@ -165,12 +187,14 @@ function App() {
   }
 
   React.useEffect(() => {
+    if (searchResults.length > 0) {
+      setShowSearchResults(true);
+    }
     if (jwt.length > 0) {
       auth
         .getUserInfo(jwt)
         .then((res) => {
           setCurrentUser(res.data);
-          setIsLoggedIn(true);
         })
         .catch((err) => {
           localStorage.removeItem("jwt");
@@ -195,7 +219,7 @@ function App() {
   }, [isPopupOpen]);
 
   React.useEffect(() => {
-    if (isLoggedIn) {
+    if (typeof currentUser === "object") {
       setIsPreloaderVisible(true);
       auth
         .getArticles(jwt)
@@ -205,7 +229,7 @@ function App() {
         .catch(console.log)
         .finally(() => setIsPreloaderVisible(false));
     }
-  }, [isLoggedIn]);
+  }, [currentUser]);
 
   React.useEffect(() => {
     const popupTransitionDelay = 0.25;
@@ -215,33 +239,42 @@ function App() {
     }
   }, [isPopupVisible]);
 
+  React.useEffect(() => {
+    localStorage.setItem(searchStorageKeys.keyword, keyword);
+  }, [keyword]);
+
+  React.useEffect(() => {
+    localStorage.setItem(searchStorageKeys.results, JSON.stringify(searchResults));
+  }, [searchResults]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header
-          isLoggedIn={isLoggedIn}
           isMobilePhone={isMobilePhone}
           onLogoutClick={handleLogout}
           onLoginClick={handleLoginButton}
         />
         <Switch>
-          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
+          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={typeof currentUser === "object"}>
             <SavedNews
               savedArticles={savedArticles}
               onCardDeleteClick={handleDeleteCard}
-              isLoggedIn={isLoggedIn}
             />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
             <Main
-              isLoggedIn={isLoggedIn}
               onSearch={handleSearch}
               onCardSaveClick={handleSaveCard}
               onCardDeleteClick={handleDeleteCard}
+              numberOfCards={{
+                value: numberOfCards,
+                setValue: setNumberOfCards,
+              }}
               searchResults={searchResults}
               showSearchResults={showSearchResults}
               savedArticles={savedArticles}
-              keyword="Boop"
+              keyword={keyword}
             />
           </Route>
         </Switch>

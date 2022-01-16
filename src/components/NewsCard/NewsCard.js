@@ -16,7 +16,7 @@ function NewsCard({ isLoggedIn, cardData, keyword, onSaveClick, onDeleteClick, i
   const articleText = typeof cardData.text === "string" ? cardData.text : cardData.content.split("[")[0];
   const articleLink = typeof cardData.link === "string" ? cardData.link : cardData.url;
   const articleImage = typeof cardData.image === "string" ? cardData.image : cardData.urlToImage;
-  const cardImage = `url(${articleImage})`;
+  const cardImage = `url("${articleImage}")`;
   const cardDate = new Date(cardData.date ? cardData.date : cardData.publishedAt);
   const dateString = `${
     monthNames[cardDate.getMonth()]
