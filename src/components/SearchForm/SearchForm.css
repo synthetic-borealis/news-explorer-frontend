@@ -55,11 +55,13 @@
   border: 0;
   height: 100%;
   box-sizing: border-box;
+  box-shadow: none;
+  transition: border 0.2s ease-in-out;
 }
 
 .SearchForm__input:focus {
   outline: 0;
-  box-shadow: -1px 2px 8px rgba(14, 26, 57, 0.5);
+  border: 1px solid rgba(0, 0, 0, 1);
 }
 
 .SearchForm__input::placeholder,
