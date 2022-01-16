@@ -8,8 +8,7 @@ import TagBubble from "../TagBubble/TagBubble";
 
 import { monthNames, routePaths } from "../../utils/constants";
 
-function NewsCard({ isLoggedIn, cardData, keyword = "", onButtonClick }) {
-  const [isSaved, setIsSaved] = React.useState(false); // TODO remove this line when News API functionality is implemented
+function NewsCard({ isLoggedIn, cardData, keyword, onSaveClick, onDeleteClick, isSaved = false }) {
   const location = useLocation();
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false);
 
@@ -54,20 +53,33 @@ function NewsCard({ isLoggedIn, cardData, keyword = "", onButtonClick }) {
     setIsTooltipVisible(false);
   };
 
-  const handleButtonClick = () => {
+  const handleCardSave = () => {
     if (isLoggedIn) {
       const articleData = {
-        keyword,
+        keyword: keyword,
         title: cardData.title,
         text: articleText,
         date: cardData.publishedAt,
         source: cardData.source.name,
         link: cardData.url,
+        image: articleImage,
       };
-      // setIsSaved(!isSaved); // TODO remove this line when News API functionality is implemented (?)
-      onButtonClick(articleData);
-    } else {
-      alert("Please log in to save articles");
+
+      onSaveClick(articleData);
+    }
+  }
+
+  const handleCardDelete = () => {
+    if (isLoggedIn) {
+      // onDeleteClick
+    }
+  }
+
+  const handleButtonClick = () => {
+    if (location.pathname === routePaths.home && !isSaved) {
+      handleCardSave();
+    } else if (location.pathname === routePaths.savedNews) {
+      // Delete
     }
   };
 

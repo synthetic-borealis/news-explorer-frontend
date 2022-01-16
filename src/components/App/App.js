@@ -22,6 +22,7 @@ import {
   popupContentTypes,
   routePaths,
   maxMobileWidth,
+  articles,
 } from "../../utils/constants";
 
 function App() {
@@ -45,7 +46,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [savedArticles, setSavedArticles] = React.useState([]);
-  const [searchResults, setSearchResults] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState(articles);
+  const [showSearchResults, setShowSearchResults] = React.useState(true);
 
   function handleWindowResize() {
     setWindowSize({
@@ -64,19 +66,17 @@ function App() {
   }
 
   function handleLogin({ email, password }) {
-    return auth
-      .signin({ email, password })
-      .then((res) => {
-        if (res.token) {
-          localStorage.setItem('jwt', res.token);
-          setJwt(res.token);
-          auth.getUserInfo(res.token).then((res) => {
-            setCurrentUser(res.data);
-            setIsLoggedIn(true);
-            setIsPopupVisible(false);
-          });
-        }
-      });
+    return auth.signin({ email, password }).then((res) => {
+      if (res.token) {
+        localStorage.setItem("jwt", res.token);
+        setJwt(res.token);
+        auth.getUserInfo(res.token).then((res) => {
+          setCurrentUser(res.data);
+          setIsLoggedIn(true);
+          setIsPopupVisible(false);
+        });
+      }
+    });
   }
 
   function handleLoginButton() {
@@ -84,11 +84,10 @@ function App() {
     setIsPopupOpen(true);
   }
 
-  function handleSignup({email, password, name}) {
-    return auth.signup({email, password, name})
-      .then(() => {
-        setPopupContentType(popupContentTypes.success);
-      });
+  function handleSignup({ email, password, name }) {
+    return auth.signup({ email, password, name }).then(() => {
+      setPopupContentType(popupContentTypes.success);
+    });
   }
 
   function handleSignupLink() {
@@ -100,10 +99,9 @@ function App() {
   }
 
   function handleSaveCard(cardData) {
-    // Check if article with the same URL already exists in saved articles
-    // If not, send request to save it
-    console.log("Saved article");
-    console.log(cardData);
+    auth.addArticle({...cardData}, jwt)
+      .then((res) => setSavedArticles([res, ...savedArticles]))
+      .catch(console.log);
   }
 
   function handleDeleteCard(cardData) {
@@ -143,7 +141,8 @@ function App() {
 
   React.useEffect(() => {
     if (jwt.length > 0) {
-      auth.getUserInfo(jwt)
+      auth
+        .getUserInfo(jwt)
         .then((res) => {
           setCurrentUser(res.data);
           setIsLoggedIn(true);
@@ -173,9 +172,10 @@ function App() {
   React.useEffect(() => {
     if (isLoggedIn) {
       setIsPreloaderVisible(true);
-      auth.getArticles(jwt)
+      auth
+        .getArticles(jwt)
         .then((res) => {
-          setSavedArticles(res.data);
+          setSavedArticles(res.data.reverse());
         })
         .catch(console.log)
         .finally(() => setIsPreloaderVisible(false));
@@ -207,7 +207,14 @@ function App() {
             />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
-            <Main isLoggedIn={isLoggedIn} onCardButtonClick={handleSaveCard} />
+            <Main
+              isLoggedIn={isLoggedIn}
+              onCardSaveClick={handleSaveCard}
+              searchResults={searchResults}
+              showSearchResults={showSearchResults}
+              savedArticles={savedArticles}
+              keyword="Boop"
+            />
           </Route>
         </Switch>
         <Footer />
