@@ -14,7 +14,6 @@ import Popup from "../Popup/Popup";
 import SignInForm from "../SignInForm/SignInForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
-import Preloader from "../Preloader/Preloader";
 
 import * as auth from "../../utils/api/MainApi";
 import * as newsApi from "../../utils/api/NewsApi";
@@ -57,7 +56,7 @@ function App() {
       ? localStorage.getItem(searchStorageKeys.keyword)
       : ""
   );
-  const [showSearchResults, setShowSearchResults] = React.useState(false);
+  const [showSearchResults, setShowSearchResults] = React.useState(searchResults.length > 0);
   const [numberOfCards, setNumberOfCards] = React.useState(3);
 
   function handleWindowResize() {
@@ -143,13 +142,12 @@ function App() {
   function handleSearch(query) {
     setNumberOfCards(3);
     setKeyword(query);
+    setShowSearchResults(true);
     setIsPreloaderVisible(true);
     newsApi
       .search(query)
       .then((res) => {
         setSearchResults(res.articles);
-        // localStorage.setItem(searchStorageKeys.results, searchResults);
-        setShowSearchResults(true);
       })
       .catch(console.log)
       .finally(() => setIsPreloaderVisible(false));
@@ -220,14 +218,12 @@ function App() {
 
   React.useEffect(() => {
     if (typeof currentUser === "object") {
-      setIsPreloaderVisible(true);
       auth
         .getArticles(jwt)
         .then((res) => {
           setSavedArticles(res.data.reverse());
         })
-        .catch(console.log)
-        .finally(() => setIsPreloaderVisible(false));
+        .catch(console.log);
     }
   }, [currentUser]);
 
@@ -271,6 +267,7 @@ function App() {
                 value: numberOfCards,
                 setValue: setNumberOfCards,
               }}
+              isPreloaderVisible={isPreloaderVisible}
               searchResults={searchResults}
               showSearchResults={showSearchResults}
               savedArticles={savedArticles}
@@ -286,7 +283,6 @@ function App() {
         ) : (
           ""
         )}
-        {isPreloaderVisible ? <Preloader /> : ""}
       </div>
     </CurrentUserContext.Provider>
   );

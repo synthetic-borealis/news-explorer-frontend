@@ -16,6 +16,7 @@ function Main({
   numberOfCards,
   searchResults,
   showSearchResults = false,
+  isPreloaderVisible = false,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   return (
@@ -30,6 +31,7 @@ function Main({
           searchResults={searchResults}
           keyword={keyword}
           numberOfCards={numberOfCards}
+          isPreloaderVisible={isPreloaderVisible}
         />
       ) : (
         ""

@@ -5,9 +5,19 @@ import React from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
+import Preloader from "../Preloader/Preloader";
 import NoResultsFound from "../NoResultsFound/NoResultsFound";
 
-function SearchResults({ isLoggedIn, searchResults, numberOfCards, savedArticles, onSaveClick, onDeleteClick, keyword = "" }) {
+function SearchResults({
+  isLoggedIn,
+  isPreloaderVisible,
+  searchResults,
+  numberOfCards,
+  savedArticles,
+  onSaveClick,
+  onDeleteClick,
+  keyword = "",
+}) {
   const sectionClassName = "SearchResults";
   const containerClassName = "SearchResuls__container";
   const titleClassName = "SearchResults__title";
@@ -27,9 +37,13 @@ function SearchResults({ isLoggedIn, searchResults, numberOfCards, savedArticles
 
   function isArticleSaved(article) {
     if (article.url) {
-      return savedArticles.some((savedArticle) => savedArticle.link === article.url);
+      return savedArticles.some(
+        (savedArticle) => savedArticle.link === article.url
+      );
     } else if (article.link) {
-      return savedArticles.some((savedArticle) => savedArticle.link === article.link);
+      return savedArticles.some(
+        (savedArticle) => savedArticle.link === article.link
+      );
     }
     return false;
   }
@@ -39,7 +53,11 @@ function SearchResults({ isLoggedIn, searchResults, numberOfCards, savedArticles
       <div className={containerClassName}>
         <h2 className={titleClassName}>Search results</h2>
         {searchResults.length === 0 ? (
-          <NoResultsFound keyword={keyword} />
+          isPreloaderVisible ? (
+            <Preloader />
+          ) : (
+            <NoResultsFound keyword={keyword} />
+          )
         ) : (
           <NewsCardList>
             {currentCards.map((card, index) => (
