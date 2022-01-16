@@ -55,16 +55,11 @@ function App() {
   }
 
   function handleLogout() {
-    // Remove token from local storage
     localStorage.removeItem("jwt");
     setJwt("");
-    // Set isLoggedIn to false
     setIsLoggedIn(false);
-    // Set currentUser to an empty object
     setCurrentUser({});
-    // Set savedArticles to an empty array
     setSavedArticles([]);
-    // Push home route to history
     history.push(routePaths.home);
   }
 
@@ -147,7 +142,6 @@ function App() {
   }
 
   React.useEffect(() => {
-    console.log("Mounting App component");
     if (jwt.length > 0) {
       auth.getUserInfo(jwt)
         .then((res) => {
