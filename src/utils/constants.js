@@ -239,6 +239,7 @@ const articles = [
 
 const errorMessages = {
   badCredentials: "Unknown e-mail or password",
+  emailNotAvailable: "This email is not available",
   otherError: "Unknown error",
 };
 

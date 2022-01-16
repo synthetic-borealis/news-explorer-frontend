@@ -90,7 +90,10 @@ function App() {
   }
 
   function handleSignup({email, password, name}) {
-    setPopupContentType(popupContentTypes.success);
+    return auth.signup({email, password, name})
+      .then(() => {
+        setPopupContentType(popupContentTypes.success);
+      });
   }
 
   function handleSignupLink() {
