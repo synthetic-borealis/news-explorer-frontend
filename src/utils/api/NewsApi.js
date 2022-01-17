@@ -1,4 +1,4 @@
-import { apiHandleResponse } from "./common";
+import { handleApiResponse } from "./common";
 import { newsApiOptions } from "../constants";
 
 const search = (query) => {
@@ -22,7 +22,7 @@ const search = (query) => {
 
   return fetch(`${url}`, {
     method: "GET",
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 export { search };

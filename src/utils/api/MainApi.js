@@ -1,12 +1,12 @@
 import { authApiOptions, authApiRoutes } from "../constants";
-import { apiHandleResponse } from "./common";
+import { handleApiResponse } from "./common";
 
 const signup = ({ email, password, name }) => {
   return fetch(`${authApiOptions.baseUrl}${authApiRoutes.signup}`, {
     method: "POST",
     headers: authApiOptions.baseHeaders,
     body: JSON.stringify({ email, password, name }),
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 const signin = ({ email, password }) => {
@@ -14,7 +14,7 @@ const signin = ({ email, password }) => {
     method: "POST",
     headers: authApiOptions.baseHeaders,
     body: JSON.stringify({ email, password }),
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 const getUserInfo = (token) => {
@@ -24,7 +24,7 @@ const getUserInfo = (token) => {
       ...authApiOptions.baseHeaders,
       "Authorization": `Bearer ${token}`,
     },
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 const getArticles = (token) => {
@@ -34,7 +34,7 @@ const getArticles = (token) => {
       ...authApiOptions.baseHeaders,
       "Authorization": `Bearer ${token}`,
     },
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 const addArticle = ({ keyword, title, text, date, source, link, image }, token) => {
@@ -45,7 +45,7 @@ const addArticle = ({ keyword, title, text, date, source, link, image }, token) 
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ keyword, title, text, date, source, link, image }),
-  }).then(apiHandleResponse);
+  }).then(handleApiResponse);
 };
 
 const deleteArticle = (articleId, token) => {
@@ -58,7 +58,7 @@ const deleteArticle = (articleId, token) => {
         Authorization: `Bearer ${token}`,
       },
     }
-  ).then(apiHandleResponse);
+  ).then(handleApiResponse);
 };
 
 export { signup, signin, getUserInfo, getArticles, addArticle, deleteArticle };
