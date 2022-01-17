@@ -5,6 +5,8 @@ import CredentialsForm from "../CredentialsForm/CredentialsForm";
 import FormInput from "../FormInput/FormInput";
 import { useStateObject } from "../../hooks/state-object";
 
+import { errorMessages } from "../../utils/constants";
+
 function SignUpForm({ onSignUp, onClickLink }) {
   const formClassName = "SignUpForm";
   const inputClassName = "SignUpForm__input";
@@ -13,24 +15,53 @@ function SignUpForm({ onSignUp, onClickLink }) {
   const usernameInputId = "signup-username-input";
   const [isFormValid, setIsFormValid] = React.useState(false);
   const [isErrorVisible, setIsErrorVisible] = React.useState(false);
-  const emailState = { value: useStateObject(""), isValid: useStateObject(false) };
-  const passwordState = { value: useStateObject(""), isValid: useStateObject(false) };
-  const usernameState = { value: useStateObject(""), isValid: useStateObject(false) };
-  const errorMessage = "Here be monsters";
+  const [errorMessage, setErrorMessage] = React.useState("Here be monsters");
+  const emailState = {
+    value: useStateObject(""),
+    isValid: useStateObject(false),
+  };
+  const passwordState = {
+    value: useStateObject(""),
+    isValid: useStateObject(false),
+  };
+  const usernameState = {
+    value: useStateObject(""),
+    isValid: useStateObject(false),
+  };
 
   function handleSubmit(evt) {
     evt.preventDefault();
     if (typeof onSignUp === "function") {
-      onSignUp();
+      onSignUp({
+        email: emailState.value.value,
+        password: passwordState.value.value,
+        name: usernameState.value.value,
+      })
+      .catch((err) => {
+        if (err.status && err.status === 409) {
+          setErrorMessage(errorMessages.emailNotAvailable);
+        } else {
+          setErrorMessage(errorMessages.otherError);
+        }
+        setIsErrorVisible(true);
+      });
     }
   }
+
+  React.useEffect(() => {
+    setIsErrorVisible(false);
+  }, [emailState.value.value, passwordState.value.value, usernameState.value.value]);
 
   React.useEffect(() => {
     const isEmailValid = emailState.isValid.value;
     const isPasswordValid = passwordState.isValid.value;
     const isUsernameValid = usernameState.isValid.value;
     setIsFormValid(isEmailValid && isPasswordValid && isUsernameValid);
-  }, [emailState.isValid.value, passwordState.isValid.value, usernameState.isValid.value]);
+  }, [
+    emailState.isValid.value,
+    passwordState.isValid.value,
+    usernameState.isValid.value,
+  ]);
 
   return (
     <CredentialsForm

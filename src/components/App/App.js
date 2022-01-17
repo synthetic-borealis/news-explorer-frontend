@@ -14,13 +14,15 @@ import Popup from "../Popup/Popup";
 import SignInForm from "../SignInForm/SignInForm";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SuccessMessage from "../SuccessMessage/SuccessMessage";
-import Preloader from "../Preloader/Preloader";
+
+import * as auth from "../../utils/api/MainApi";
+import * as newsApi from "../../utils/api/NewsApi";
 
 import {
   popupContentTypes,
   routePaths,
   maxMobileWidth,
-  articles,
+  searchStorageKeys,
 } from "../../utils/constants";
 
 function App() {
@@ -32,17 +34,30 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  const [currentUser, setCurrentUser] = React.useState({
-    name: "Elise Bauer",
-    email: "elise.bauer@aperturescience.com",
-  });
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isPopupOpen, setIsPopupOpen] = React.useState(false);
   const [isPopupVisible, setIsPopupVisible] = React.useState(false);
   const [popupContentType, setPopupContentType] = React.useState(
     popupContentTypes.signIn
   );
   const [isPreloaderVisible, setIsPreloaderVisible] = React.useState(false);
+  const [jwt, setJwt] = React.useState(
+    localStorage.getItem("jwt") ? localStorage.getItem("jwt") : ""
+  );
+  const [currentUser, setCurrentUser] = React.useState();
+  const [savedArticles, setSavedArticles] = React.useState([]);
+  const [searchResults, setSearchResults] = React.useState(
+    localStorage.getItem(searchStorageKeys.results)
+      ? JSON.parse(localStorage.getItem(searchStorageKeys.results))
+      : []
+  );
+
+  const [keyword, setKeyword] = React.useState(
+    localStorage.getItem(searchStorageKeys.keyword)
+      ? localStorage.getItem(searchStorageKeys.keyword)
+      : ""
+  );
+  const [showSearchResults, setShowSearchResults] = React.useState(searchResults.length > 0);
+  const [numberOfCards, setNumberOfCards] = React.useState(3);
 
   function handleWindowResize() {
     setWindowSize({
@@ -52,13 +67,26 @@ function App() {
   }
 
   function handleLogout() {
-    setIsLoggedIn(false);
+    localStorage.removeItem("jwt");
+    setJwt("");
+    setCurrentUser();
+    setSavedArticles([]);
+    setSearchResults([]);
+    setShowSearchResults(false);
     history.push(routePaths.home);
   }
 
-  function handleLogin() {
-    setIsLoggedIn(true);
-    setIsPopupVisible(false);
+  function handleLogin({ email, password }) {
+    return auth.signin({ email, password }).then((res) => {
+      if (res.token) {
+        localStorage.setItem("jwt", res.token);
+        setJwt(res.token);
+        auth.getUserInfo(res.token).then((res) => {
+          setCurrentUser(res.data);
+          setIsPopupVisible(false);
+        });
+      }
+    });
   }
 
   function handleLoginButton() {
@@ -66,8 +94,10 @@ function App() {
     setIsPopupOpen(true);
   }
 
-  function handleSignup() {
-    setPopupContentType(popupContentTypes.success);
+  function handleSignup({ email, password, name }) {
+    return auth.signup({ email, password, name }).then(() => {
+      setPopupContentType(popupContentTypes.success);
+    });
   }
 
   function handleSignupLink() {
@@ -79,11 +109,48 @@ function App() {
   }
 
   function handleSaveCard(cardData) {
-    alert("Saving card");
+    auth
+      .addArticle({ ...cardData }, jwt)
+      .then((res) => setSavedArticles([res, ...savedArticles]))
+      .catch(console.log);
   }
 
   function handleDeleteCard(cardData) {
-    alert("Deleting card");
+    let cardId = cardData._id;
+    // Save button is clicked twice
+    if (!cardId) {
+      const foundArticle = savedArticles.find(
+        (article) =>
+          article.link === cardData.url || article.link === cardData.link
+      );
+      if (foundArticle) {
+        cardId = foundArticle._id;
+      }
+    }
+    if (cardId) {
+      auth
+        .deleteArticle(cardId, jwt)
+        .then(() => {
+          setSavedArticles(
+            savedArticles.filter((element) => element._id !== cardId)
+          );
+        })
+        .catch(console.log);
+    }
+  }
+
+  function handleSearch(query) {
+    setNumberOfCards(3);
+    setKeyword(query);
+    setShowSearchResults(true);
+    setIsPreloaderVisible(true);
+    newsApi
+      .search(query)
+      .then((res) => {
+        setSearchResults(res.articles);
+      })
+      .catch(console.log)
+      .finally(() => setIsPreloaderVisible(false));
   }
 
   function handlePopupClose() {
@@ -94,13 +161,23 @@ function App() {
   function renderPopupContent() {
     switch (popupContentType) {
       case popupContentTypes.signIn:
-        return <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />;
+        return (
+          <SignInForm onSignIn={handleLogin} onClickLink={handleSignupLink} />
+        );
 
       case popupContentTypes.signUp:
-        return <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />;
+        return (
+          <SignUpForm onSignUp={handleSignup} onClickLink={handleSigninLink} />
+        );
 
       case popupContentTypes.success:
-        return <SuccessMessage title="Registration successfully completed!" linkCaption="Sign in" onClickLink={handleSigninLink} />;
+        return (
+          <SuccessMessage
+            title="Registration successfully completed!"
+            linkCaption="Sign in"
+            onClickLink={handleSigninLink}
+          />
+        );
 
       default:
         return <h2>You shouldn't see this</h2>;
@@ -108,12 +185,27 @@ function App() {
   }
 
   React.useEffect(() => {
+    if (searchResults.length > 0) {
+      setShowSearchResults(true);
+    }
+    if (jwt.length > 0) {
+      auth
+        .getUserInfo(jwt)
+        .then((res) => {
+          setCurrentUser(res.data);
+        })
+        .catch((err) => {
+          localStorage.removeItem("jwt");
+          setJwt("");
+          console.log(err);
+        });
+    }
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
   React.useEffect(() => {
-    setIsMobilePhone((windowSize.width <= maxMobileWidth));
+    setIsMobilePhone(windowSize.width <= maxMobileWidth);
   }, [windowSize]);
 
   React.useEffect(() => {
@@ -125,6 +217,17 @@ function App() {
   }, [isPopupOpen]);
 
   React.useEffect(() => {
+    if (typeof currentUser === "object") {
+      auth
+        .getArticles(jwt)
+        .then((res) => {
+          setSavedArticles(res.data.reverse());
+        })
+        .catch(console.log);
+    }
+  }, [currentUser]);
+
+  React.useEffect(() => {
     const popupTransitionDelay = 0.25;
 
     if (!isPopupVisible) {
@@ -132,24 +235,44 @@ function App() {
     }
   }, [isPopupVisible]);
 
+  React.useEffect(() => {
+    localStorage.setItem(searchStorageKeys.keyword, keyword);
+  }, [keyword]);
+
+  React.useEffect(() => {
+    localStorage.setItem(searchStorageKeys.results, JSON.stringify(searchResults));
+  }, [searchResults]);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <Header
-          isLoggedIn={isLoggedIn}
           isMobilePhone={isMobilePhone}
           onLogoutClick={handleLogout}
           onLoginClick={handleLoginButton}
         />
         <Switch>
-          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={isLoggedIn}>
+          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={typeof currentUser === "object"}>
             <SavedNews
-              savedArticles={articles}
-              onCardButtonClick={handleDeleteCard}
+              savedArticles={savedArticles}
+              onCardDeleteClick={handleDeleteCard}
             />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
-            <Main isLoggedIn={isLoggedIn} onCardButtonClick={handleSaveCard} />
+            <Main
+              onSearch={handleSearch}
+              onCardSaveClick={handleSaveCard}
+              onCardDeleteClick={handleDeleteCard}
+              numberOfCards={{
+                value: numberOfCards,
+                setValue: setNumberOfCards,
+              }}
+              isPreloaderVisible={isPreloaderVisible}
+              searchResults={searchResults}
+              showSearchResults={showSearchResults}
+              savedArticles={savedArticles}
+              keyword={keyword}
+            />
           </Route>
         </Switch>
         <Footer />
@@ -160,7 +283,6 @@ function App() {
         ) : (
           ""
         )}
-        {isPreloaderVisible ? <Preloader /> : ""}
       </div>
     </CurrentUserContext.Provider>
   );

@@ -2,7 +2,7 @@ import "./SearchSection.css";
 
 import SearchForm from "../SearchForm/SearchForm";
 
-function SearchSection() {
+function SearchSection({ onSearch }) {
   const sectionClassName = "SearchSection";
   const containerClassName = "SearchSection__container";
   const titleClassName = "SearchSection__title";
@@ -16,7 +16,7 @@ function SearchSection() {
           Find the latest news on any topic and save them in your personal
           account.
         </p>
-        <SearchForm />
+        <SearchForm onSearch={onSearch} />
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import React from "react";
 import CredentialsForm from "../CredentialsForm/CredentialsForm";
 import FormInput from "../FormInput/FormInput";
 import { useStateObject } from "../../hooks/state-object";
+import { errorMessages } from "../../utils/constants";
 
 function SignInForm({ onSignIn, onClickLink }) {
   const formClassName = "SignInForm";
@@ -12,16 +13,37 @@ function SignInForm({ onSignIn, onClickLink }) {
   const passwordInputId = "signin-password-input";
   const [isFormValid, setIsFormValid] = React.useState(false);
   const [isErrorVisible, setIsErrorVisible] = React.useState(false);
-  const emailState = { value: useStateObject(""), isValid: useStateObject(false) };
-  const passwordState = { value: useStateObject(""), isValid: useStateObject(false) };
-  const errorMessage = "Here be monsters";
+  const [errorMessage, setErrorMessage] = React.useState("Here be monsters");
+  const emailState = {
+    value: useStateObject(""),
+    isValid: useStateObject(false),
+  };
+  const passwordState = {
+    value: useStateObject(""),
+    isValid: useStateObject(false),
+  };
 
   function handleSubmit(evt) {
     evt.preventDefault();
     if (typeof onSignIn === "function") {
-      onSignIn();
+      onSignIn({
+        email: emailState.value.value,
+        password: passwordState.value.value,
+      })
+      .catch((err) => {
+        if (err.status && err.status === 401) {
+          setErrorMessage(errorMessages.badCredentials);
+        } else {
+          setErrorMessage(errorMessages.otherError);
+        }
+        setIsErrorVisible(true);
+      });
     }
   }
+
+  React.useEffect(() => {
+    setIsErrorVisible(false);
+  }, [emailState.value.value, passwordState.value.value]);
 
   React.useEffect(() => {
     const isEmailValid = emailState.isValid.value;

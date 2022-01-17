@@ -1,20 +1,41 @@
 import "./Main.css";
 
+import React from "react";
+
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SearchSection from "../SearchSection/SearchSection";
 import SearchResults from "../SearchResults/SearchResults";
 import AboutSection from "../AboutSection/AboutSection";
 
-import { articles } from "../../utils/constants";
-
-function Main({ isLoggedIn, onCardButtonClick }) {
+function Main({
+  onCardSaveClick,
+  onCardDeleteClick,
+  onSearch,
+  savedArticles,
+  keyword,
+  numberOfCards,
+  searchResults,
+  showSearchResults = false,
+  isPreloaderVisible = false,
+}) {
+  const currentUser = React.useContext(CurrentUserContext);
   return (
     <main>
-      <SearchSection />
-      <SearchResults
-        currentResults={articles}
-        isLoggedIn={isLoggedIn}
-        onCardButtonClick={onCardButtonClick}
-      />
+      <SearchSection onSearch={onSearch} />
+      {showSearchResults ? (
+        <SearchResults
+          isLoggedIn={currentUser}
+          onSaveClick={onCardSaveClick}
+          onDeleteClick={onCardDeleteClick}
+          savedArticles={savedArticles}
+          searchResults={searchResults}
+          keyword={keyword}
+          numberOfCards={numberOfCards}
+          isPreloaderVisible={isPreloaderVisible}
+        />
+      ) : (
+        ""
+      )}
       <AboutSection />
     </main>
   );

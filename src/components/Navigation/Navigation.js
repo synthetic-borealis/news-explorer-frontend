@@ -11,7 +11,6 @@ import { routePaths } from "../../utils/constants";
 
 function Navigation({
   onMenuButtonClick,
-  isLoggedIn,
   isBackgroundWhite,
   isMobilePhone,
   isMenuOpen,
@@ -19,6 +18,7 @@ function Navigation({
   onLogoutClick,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
+  const isLoggedIn = typeof currentUser === "object";
   const userName = isLoggedIn ? currentUser.name.split(" ")[0] : "";
   const navigationClasses = `Navigation${
     isBackgroundWhite ? " Navigation_background_white" : ""
