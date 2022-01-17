@@ -28,7 +28,6 @@
   margin: 20px auto 24px;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 224px;
 }
 
 .NewsCard__date {
