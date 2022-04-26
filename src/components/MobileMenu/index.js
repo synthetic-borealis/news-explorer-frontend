@@ -4,8 +4,8 @@ import React from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import { Link } from "react-router-dom";
-import LoginButton from "../LoginButton/LoginButton";
-import SignoutButton from "../SignoutButton/SignoutButton";
+import LoginButton from "../LoginButton";
+import SignoutButton from "../SignoutButton";
 
 import { routePaths } from "../../utils/constants";
 

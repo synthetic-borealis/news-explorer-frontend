@@ -2,8 +2,8 @@ import "./SavedNews.css";
 
 import React from "react";
 
-import SavedNewsHeader from "../../components/SavedNewsHeader/SavedNewsHeader"
-import SavedNewsMain from "../../components/SavedNewsMain/SavedNewsMain";
+import SavedNewsHeader from "../../components/SavedNewsHeader"
+import SavedNewsMain from "../../components/SavedNewsMain";
 
 function SavedNews({ savedArticles, onCardDeleteClick }) {
   const sectionClassName = "SavedNews";

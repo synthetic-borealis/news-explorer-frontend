@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -9,12 +9,12 @@ import "./App.css";
 import SavedNews from "../../routes/SavedNews";
 import Home from "../../routes/Home";
 
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Popup from "../Popup/Popup";
-import SignInForm from "../SignInForm/SignInForm";
-import SignUpForm from "../SignUpForm/SignUpForm";
-import SuccessMessage from "../SuccessMessage/SuccessMessage";
+import Header from "../Header";
+import Footer from "../Footer";
+import Popup from "../Popup";
+import SignInForm from "../SignInForm";
+import SignUpForm from "../SignUpForm";
+import SuccessMessage from "../SuccessMessage";
 
 import * as auth from "../../utils/api/MainApi";
 import * as newsApi from "../../utils/api/NewsApi";

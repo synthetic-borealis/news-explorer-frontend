@@ -1,6 +1,6 @@
 import "./SearchSection.css";
 
-import SearchForm from "../SearchForm/SearchForm";
+import SearchForm from "../SearchForm";
 
 function SearchSection({ onSearch }) {
   const sectionClassName = "SearchSection";

@@ -2,8 +2,8 @@ import "./Header.css";
 
 import React from "react";
 import { useLocation } from "react-router";
-import Navigation from "../Navigation/Navigation";
-import MobileMenu from "../MobileMenu/MobileMenu";
+import Navigation from "../Navigation";
+import MobileMenu from "../MobileMenu";
 
 import { routePaths } from "../../utils/constants";
 

@@ -3,9 +3,9 @@ import "./Home.css";
 import React from "react";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import SearchSection from "../../components/SearchSection/SearchSection";
-import SearchResults from "../../components/SearchResults/SearchResults";
-import AboutSection from "../../components/AboutSection/AboutSection";
+import SearchSection from "../../components/SearchSection";
+import SearchResults from "../../components/SearchResults";
+import AboutSection from "../../components/AboutSection";
 
 function Home({
   onCardSaveClick,

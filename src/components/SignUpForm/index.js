@@ -1,8 +1,8 @@
 import "./SignUpForm.css";
 
 import React from "react";
-import CredentialsForm from "../CredentialsForm/CredentialsForm";
-import FormInput from "../FormInput/FormInput";
+import CredentialsForm from "../CredentialsForm";
+import FormInput from "../FormInput";
 import { useStateObject } from "../../hooks/state-object";
 
 import { errorMessages } from "../../utils/constants";

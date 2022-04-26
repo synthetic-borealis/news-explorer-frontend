@@ -2,9 +2,9 @@ import "./NewsCard.css";
 
 import React from "react";
 import { useLocation } from "react-router";
-import NewsCardButton from "../NewsCardButton/NewsCardButton";
-import Tooltip from "../Tooltip/Tooltip";
-import TagBubble from "../TagBubble/TagBubble";
+import NewsCardButton from "../NewsCardButton";
+import Tooltip from "../Tooltip";
+import TagBubble from "../TagBubble";
 
 import { monthNames, routePaths } from "../../utils/constants";
 

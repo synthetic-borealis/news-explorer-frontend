@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../Button";
 
 import { useLocation } from "react-router";
 import { routePaths } from "../../utils/constants";

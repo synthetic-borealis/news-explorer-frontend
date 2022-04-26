@@ -4,9 +4,9 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import "./Navigation.css";
 
-import SignoutButton from "../SignoutButton/SignoutButton";
-import LoginButton from "../LoginButton/LoginButton";
-import MenuButton from "../MenuButton/MenuButton";
+import SignoutButton from "../SignoutButton";
+import LoginButton from "../LoginButton";
+import MenuButton from "../MenuButton";
 import { routePaths } from "../../utils/constants";
 
 function Navigation({

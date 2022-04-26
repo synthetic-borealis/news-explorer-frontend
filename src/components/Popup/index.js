@@ -1,6 +1,6 @@
 import "./Popup.css";
 
-import CloseButton from "../CloseButton/CloseButton";
+import CloseButton from "../CloseButton";
 
 function Popup({ isVisible, onClose, children }) {
   const popupClassName = `Popup${isVisible ? " Popup_visible" : ""}`;

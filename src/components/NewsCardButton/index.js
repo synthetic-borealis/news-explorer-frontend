@@ -7,7 +7,7 @@ import deleteIcon from "../../images/icons/icon-trash.svg";
 import { useLocation } from "react-router";
 import { routePaths } from "../../utils/constants";
 
-import Button from "../Button/Button";
+import Button from "../Button";
 
 function NewsCardButton({ onClick, onMouseEnter, onMouseLeave, isSaved }) {
   const location = useLocation();

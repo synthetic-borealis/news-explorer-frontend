@@ -2,11 +2,11 @@ import "./SearchResults.css";
 
 import React from "react";
 
-import NewsCardList from "../NewsCardList/NewsCardList";
-import NewsCard from "../NewsCard/NewsCard";
-import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
-import Preloader from "../Preloader/Preloader";
-import NoResultsFound from "../NoResultsFound/NoResultsFound";
+import NewsCardList from "../NewsCardList";
+import NewsCard from "../NewsCard";
+import ShowMoreButton from "../ShowMoreButton";
+import Preloader from "../Preloader";
+import NoResultsFound from "../NoResultsFound";
 
 function SearchResults({
   isLoggedIn,

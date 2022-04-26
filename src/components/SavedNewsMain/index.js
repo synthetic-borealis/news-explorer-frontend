@@ -1,7 +1,7 @@
 import "./SavedNewsMain.css";
 
-import NewsCardList from "../NewsCardList/NewsCardList";
-import NewsCard from "../NewsCard/NewsCard";
+import NewsCardList from "../NewsCardList";
+import NewsCard from "../NewsCard";
 
 function SavedNewsMain({ savedArticles, onDeleteClick }) {
   const sectionClassName = "SavedNewsMain";

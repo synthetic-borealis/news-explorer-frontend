@@ -1,7 +1,7 @@
 import React from "react";
 import "./SearchForm.css";
 
-import Button from "../Button/Button";
+import Button from "../Button";
 import { searchStorageKeys } from "../../utils/constants";
 
 function SearchForm({ onSearch }) {

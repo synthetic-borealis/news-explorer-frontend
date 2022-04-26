@@ -1,6 +1,6 @@
 import "./ShowMoreButton.css";
 
-import Button from "../Button/Button";
+import Button from "../Button";
 
 function ShowMoreButton({ onClick }) {
   const buttonClassName = "ShowMoreButton";

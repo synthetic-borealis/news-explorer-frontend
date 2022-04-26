@@ -1,6 +1,6 @@
 import "./CredentialsForm.css";
 
-import Button from "../Button/Button";
+import Button from "../Button";
 
 function CredentialsForm({
   name,
