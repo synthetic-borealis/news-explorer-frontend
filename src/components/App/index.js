@@ -6,9 +6,10 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 import "./App.css";
 
+import SavedNews from "../../routes/SavedNews";
+import Home from "../../routes/Home";
+
 import Header from "../Header/Header";
-import SavedNews from "../SavedNews/SavedNews";
-import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Popup from "../Popup/Popup";
 import SignInForm from "../SignInForm/SignInForm";
@@ -259,7 +260,7 @@ function App() {
             />
           </ProtectedRoute>
           <Route exact path={routePaths.home}>
-            <Main
+            <Home
               onSearch={handleSearch}
               onCardSaveClick={handleSaveCard}
               onCardDeleteClick={handleDeleteCard}

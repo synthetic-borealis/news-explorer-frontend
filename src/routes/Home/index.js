@@ -1,13 +1,13 @@
-import "./Main.css";
+import "./Home.css";
 
 import React from "react";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import SearchSection from "../SearchSection/SearchSection";
-import SearchResults from "../SearchResults/SearchResults";
-import AboutSection from "../AboutSection/AboutSection";
+import SearchSection from "../../components/SearchSection/SearchSection";
+import SearchResults from "../../components/SearchResults/SearchResults";
+import AboutSection from "../../components/AboutSection/AboutSection";
 
-function Main({
+function Home({
   onCardSaveClick,
   onCardDeleteClick,
   onSearch,
@@ -41,4 +41,4 @@ function Main({
   );
 }
 
-export default Main;
+export default Home;
