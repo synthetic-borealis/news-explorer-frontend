@@ -18,7 +18,6 @@ function NewsCardButton({ onClick, onMouseEnter, onMouseLeave, isSaved }) {
       ? filledBookmarkIcon
       : bookmarkIcon;
 
-  const buttonClassName = "NewsCardButton";
   const iconClasses = `NewsCardButton__icon${
     location.pathname === routePaths.home && isSaved
       ? " NewsCardButton__icon_filled"
@@ -30,7 +29,7 @@ function NewsCardButton({ onClick, onMouseEnter, onMouseLeave, isSaved }) {
 
   return (
     <Button
-      className={buttonClassName}
+      className="NewsCardButton"
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

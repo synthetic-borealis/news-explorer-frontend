@@ -29,15 +29,6 @@ function NewsCard({ isLoggedIn, cardData, keyword, onSaveClick, onDeleteClick, i
         : "Sign in to save articles"
       : "Remove from saved";
 
-  const cardClassName = "NewsCard";
-  const imageClassName = "NewsCard__image";
-  const containerClassName = "NewsCard__container";
-  const dateClassName = "NewsCard__date";
-  const titleClassName = "NewsCard__title";
-  const contentClassName = "NewsCard__content";
-  const sourceClassName = "NewsCard__source";
-  const linkClassName = "NewsCard__link";
-
   const tooltipClasses = `NewsCard__tooltip${
     isTooltipVisible ? " NewsCard__tooltip_visible" : ""
   }`;
@@ -88,21 +79,21 @@ function NewsCard({ isLoggedIn, cardData, keyword, onSaveClick, onDeleteClick, i
   };
 
   return (
-    <article className={cardClassName}>
+    <article className="NewsCard">
       <div
-        className={imageClassName}
+        className="NewsCard__image"
         style={{ backgroundImage: cardImage }}
         {...{ "aria-label": `${cardData.title}` }}
       />
-      <div className={containerClassName}>
-        <p className={dateClassName}>{dateString}</p>
-        <h3 className={titleClassName}>{cardData.title}</h3>
-        <p className={contentClassName}>{articleText}</p>
-        <p className={sourceClassName}>{articleSource}</p>
+      <div className="NewsCard__container">
+        <p className="NewsCard__date">{dateString}</p>
+        <h3 className="NewsCard__title">{cardData.title}</h3>
+        <p className="NewsCard__content">{articleText}</p>
+        <p className="NewsCard__source">{articleSource}</p>
       </div>
       <a
         href={articleLink}
-        className={linkClassName}
+        className="NewsCard__link"
         target="_blank"
         rel="noreferrer"
       >

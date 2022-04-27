@@ -2,11 +2,9 @@ import Button from "../Button";
 import "./LoginButton.css";
 
 function LoginButton({ onClick }) {
-  const buttonClassName = "LoginButton";
-  const labelClassName = "LoginButton__label";
   return (
-    <Button onClick={onClick} className={buttonClassName}>
-      <p className={labelClassName}>Sign In</p>
+    <Button onClick={onClick} className="LoginButton">
+      <p className="LoginButton__label">Sign In</p>
     </Button>
   );
 }

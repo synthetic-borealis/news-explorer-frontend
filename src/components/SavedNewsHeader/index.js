@@ -3,13 +3,6 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./SavedNewsHeader.css";
 
 function SavedNewsHeader({ savedArticles }) {
-  const sectionClassName = "SavedNewsHeader";
-  const containerClassName = "SavedNewsHeader__container";
-  const titleClassName = "SavedNewsHeader__title";
-  const subtitleClassName = "SavedNewsHeader__subtitle";
-  const keywordsLabelClass = "SavedNewsHeader__keywords";
-  const keywordsListClass = "SavedNewsHeader__keyword-list";
-
   const currentUser = React.useContext(CurrentUserContext);
   const userName = currentUser.name.split(" ")[0];
   const numberOfArticles = savedArticles.length | "error";
@@ -40,15 +33,15 @@ function SavedNewsHeader({ savedArticles }) {
   }
 
   return (
-    <section className={sectionClassName}>
-      <div className={containerClassName}>
-        <p className={titleClassName}>Saved articles</p>
-        <h2 className={subtitleClassName}>
+    <section className="SavedNewsHeader">
+      <div className="SavedNewsHeader__container">
+        <p className="SavedNewsHeader__title">Saved articles</p>
+        <h2 className="SavedNewsHeader__subtitle">
           {userName}, you have {numberOfArticles} saved articles
         </h2>
-        <p className={keywordsLabelClass}>
+        <p className="SavedNewsHeader__keywords">
           By keywords:{" "}
-          <span className={keywordsListClass}>{keywordString}</span>
+          <span className="SavedNewsHeader__keyword-list">{keywordString}</span>
         </p>
       </div>
     </section>

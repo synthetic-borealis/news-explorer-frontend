@@ -1,9 +1,7 @@
 import "./NewsCardList.css";
 
 function NewsCardList({ children }) {
-  const listClassName = "NewsCardList";
-
-  return <ul className={listClassName}>{children}</ul>;
+  return <ul className="NewsCardList">{children}</ul>;
 }
 
 export default NewsCardList;

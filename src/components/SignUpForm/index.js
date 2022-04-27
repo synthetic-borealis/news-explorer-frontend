@@ -8,8 +8,6 @@ import { useStateObject } from "../../hooks/state-object";
 import { errorMessages } from "../../utils/constants";
 
 function SignUpForm({ onSignUp, onClickLink }) {
-  const formClassName = "SignUpForm";
-  const inputClassName = "SignUpForm__input";
   const emailInputId = "signup-email-input";
   const passwordInputId = "signup-password-input";
   const usernameInputId = "signup-username-input";
@@ -65,7 +63,7 @@ function SignUpForm({ onSignUp, onClickLink }) {
 
   return (
     <CredentialsForm
-      className={formClassName}
+      className="SignUpForm"
       name="signup-form"
       title="Sign up"
       linkCaption="Sign in"
@@ -79,7 +77,7 @@ function SignUpForm({ onSignUp, onClickLink }) {
         type="email"
         name="email"
         id={emailInputId}
-        className={inputClassName}
+        className="SignUpForm__input"
         caption="Email"
         placeHolder="Enter email"
         state={emailState}
@@ -90,7 +88,7 @@ function SignUpForm({ onSignUp, onClickLink }) {
         type="password"
         name="password"
         id={passwordInputId}
-        className={inputClassName}
+        className="SignUpForm__input"
         caption="Password"
         placeHolder="Enter password"
         state={passwordState}
@@ -102,7 +100,7 @@ function SignUpForm({ onSignUp, onClickLink }) {
         type="text"
         name="username"
         id={usernameInputId}
-        className={inputClassName}
+        className="SignUpForm__input"
         caption="Username"
         placeHolder="Enter your username"
         state={usernameState}

@@ -15,30 +15,26 @@ function CredentialsForm({
   isErrorVisible,
 }) {
   const formClassName = `CredentialsForm${className ? ` ${className}` : ""}`;
-  const titleClassName = "CredentialsForm__title";
   const errorLabelClass = `CredentialsForm__error${
     isErrorVisible ? " CredentialsForm__error_visible" : ""
   }`;
-  const submitButtonClass = "CredentialsForm__submit-button";
-  const footerClass = "CredentialsForm__footer";
-  const footerLinkClass = "CredentialsForm__footer-link";
 
   return (
     <form className={formClassName} name={name} action="#" onSubmit={onSubmit}>
-      <h2 className={titleClassName}>{title}</h2>
+      <h2 className="CredentialsForm__title">{title}</h2>
       {children}
       <span className={errorLabelClass}>{errorMessage}</span>
       <Button
         type="submit"
-        className={submitButtonClass}
+        className="CredentialsForm__submit-button"
         {...(!isValid ? { disabled: true } : {})}
       >
         {title}
       </Button>
-      <p className={footerClass}>
+      <p className="CredentialsForm__footer">
         Or{" "}
         <button
-          className={footerLinkClass}
+          className="CredentialsForm__footer-link"
           {...{ "aria-label": linkCaption }}
           onClick={onClickLink}
         >

@@ -26,26 +26,22 @@ function MobileMenu({
     menuClasses = menuClasses.concat(" MobileMenu_background_white");
   }
 
-  const containerClass = "MobileMenu__container";
-  const menuItemClass = "MobileMenu__item";
-  const linkClass = "MobileMenu__link";
-
   return (
     <section className={menuClasses}>
-      <ul className={containerClass}>
-        <li className={menuItemClass}>
-          <Link className={linkClass} to={routePaths.home}>
+      <ul className="MobileMenu__container">
+        <li className="MobileMenu__item">
+          <Link className="MobileMenu__link" to={routePaths.home}>
             Home
           </Link>
         </li>
         {isLoggedIn ? (
           <>
-            <li className={menuItemClass}>
-              <Link className={linkClass} to={routePaths.savedNews}>
+            <li className="MobileMenu__item">
+              <Link className="MobileMenu__link" to={routePaths.savedNews}>
                 Saved articles
               </Link>
             </li>
-            <li className={menuItemClass}>
+            <li className="MobileMenu__item">
               <SignoutButton
                 userName={userName}
                 ariaLabel="sign out"
@@ -54,7 +50,7 @@ function MobileMenu({
             </li>
           </>
         ) : (
-          <li className={menuItemClass}>
+          <li className="MobileMenu__item">
             <LoginButton ariaLabel="sign in" onClick={onLoginClick} />
           </li>
         )}

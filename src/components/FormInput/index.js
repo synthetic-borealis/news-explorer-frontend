@@ -20,8 +20,6 @@ function FormInput({
   const [isErrorVisible, setIsErrorVisible] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
   const containerClassName = `FormInput${className ? ` ${className}` : ""}`;
-  const captionClassName = "FormInput__caption";
-  const inputClassName = "FormInput__input";
   const errorLabelClassName = `FormInput__error${
     isErrorVisible ? " FormInput__error_visible" : ""
   }`;
@@ -56,9 +54,9 @@ function FormInput({
 
   return (
     <label className={containerClassName}>
-      <p className={captionClassName}>{caption ? caption : "Input"}</p>
+      <p className="FormInput__caption">{caption ? caption : "Input"}</p>
       <input
-        className={inputClassName}
+        className="FormInput__input"
         type={type}
         id={id}
         name={name}

@@ -1,4 +1,4 @@
-import { Route, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { routePaths } from "../../utils/constants";
 
 function ProtectedRoute({ children, isLoggedIn, ...props }) {

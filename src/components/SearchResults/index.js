@@ -18,10 +18,6 @@ function SearchResults({
   onDeleteClick,
   keyword = "",
 }) {
-  const sectionClassName = "SearchResults";
-  const containerClassName = "SearchResuls__container";
-  const titleClassName = "SearchResults__title";
-
   const currentCards =
     searchResults.length > 0 ? searchResults.slice(0, numberOfCards.value) : [];
   const cardNumberDifference = searchResults.length - numberOfCards.value;
@@ -49,9 +45,9 @@ function SearchResults({
   }
 
   return (
-    <section className={sectionClassName}>
-      <div className={containerClassName}>
-        <h2 className={titleClassName}>Search results</h2>
+    <section className="SearchResults">
+      <div className="SearchResuls__container">
+        <h2 className="SearchResults__title">Search results</h2>
         {searchResults.length === 0 ? (
           isPreloaderVisible ? (
             <Preloader />

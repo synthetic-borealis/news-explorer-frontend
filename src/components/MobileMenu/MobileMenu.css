@@ -3,7 +3,7 @@
   display: block;
   width: 100%;
   overflow: hidden;
-  top: 100%;
+  top: calc(100% - 1px);
   left: 0;
   background-color: #1a1b22;
   max-height: 0;

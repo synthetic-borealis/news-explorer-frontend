@@ -7,8 +7,6 @@ import { useStateObject } from "../../hooks/state-object";
 import { errorMessages } from "../../utils/constants";
 
 function SignInForm({ onSignIn, onClickLink }) {
-  const formClassName = "SignInForm";
-  const inputClassName = "SignInForm__input";
   const emailInputId = "signin-email-input";
   const passwordInputId = "signin-password-input";
   const [isFormValid, setIsFormValid] = React.useState(false);
@@ -53,7 +51,7 @@ function SignInForm({ onSignIn, onClickLink }) {
 
   return (
     <CredentialsForm
-      className={formClassName}
+      className="SignInForm"
       name="signin-form"
       title="Sign in"
       linkCaption="Sign up"
@@ -67,7 +65,7 @@ function SignInForm({ onSignIn, onClickLink }) {
         type="email"
         name="email"
         id={emailInputId}
-        className={inputClassName}
+        className="SignInForm__input"
         caption="Email"
         placeHolder="Enter email"
         state={emailState}
@@ -78,7 +76,7 @@ function SignInForm({ onSignIn, onClickLink }) {
         type="password"
         name="password"
         id={passwordInputId}
-        className={inputClassName}
+        className="SignInForm__input"
         caption="Password"
         placeHolder="Enter password"
         state={passwordState}

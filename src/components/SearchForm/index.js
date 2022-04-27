@@ -11,14 +11,9 @@ function SearchForm({ onSearch }) {
       : ""
   );
   const [isErrorVisible, setIsErrorVisible] = React.useState(false);
-  const formClassName = "SearchForm";
-  const inputContainerClass = "SearchForm__input-container";
-  const inputClassName = "SearchForm__input";
   const errorLabelClass = `SearchForm__error${
     isErrorVisible ? " SearchForm__error_visible" : ""
   }`;
-  const buttonClassName = "SearchForm__button";
-  const buttonLabelClass = "SearchForm__button-label";
 
   const handleChange = (evt) => {
     setSearchValue(evt.target.value);
@@ -39,11 +34,11 @@ function SearchForm({ onSearch }) {
   };
 
   return (
-    <form name="search-form" className={formClassName} onSubmit={handleSubmit}>
-      <label className={inputContainerClass}>
+    <form name="search-form" className="SearchForm" onSubmit={handleSubmit}>
+      <label className="SearchForm__input-container">
         <input
           name="search"
-          className={inputClassName}
+          className="SearchForm__input"
           placeholder="Enter topic"
           value={searchValue}
           onChange={handleChange}
@@ -56,11 +51,10 @@ function SearchForm({ onSearch }) {
       </label>
       <Button
         type="submit"
-        className={buttonClassName}
-        // onClick={(e) => e.preventDefault()}
+        className="SearchForm__button"
         ariaLabel="search button"
       >
-        <span className={buttonLabelClass}>Search</span>
+        <span className="SearchForm__button-label">Search</span>
       </Button>
     </form>
   );

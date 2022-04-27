@@ -260,6 +260,7 @@ function App() {
           isMobilePhone={isMobilePhone}
           onLogoutClick={handleLogout}
           onLoginClick={handleLoginButton}
+          isLoggedIn={typeof currentUser === "object"}
         />
         <Routes>
           <Route
