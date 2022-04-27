@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { routePaths } from "../../utils/constants";
 
-function ProtectedRoute({ children, isLoggedIn, ...props }) {
+function ProtectedRoute({ children, isLoggedIn }) {
   if (!isLoggedIn) {
     return <Navigate to={routePaths.home} />;
   }

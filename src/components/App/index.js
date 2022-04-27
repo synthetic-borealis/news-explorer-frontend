@@ -28,7 +28,7 @@ import {
 } from "../../utils/constants";
 
 function App() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [isMobilePhone, setIsMobilePhone] = React.useState(
     window.innerWidth <= maxMobileWidth
   );
@@ -76,7 +76,7 @@ function App() {
     setSavedArticles([]);
     setSearchResults([]);
     setShowSearchResults(false);
-    history.push(routePaths.home);
+    navigate(routePaths.home);
   }
 
   function handleLogin({ email, password }) {
