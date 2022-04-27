@@ -15,6 +15,7 @@ import Popup from "../Popup";
 import SignInForm from "../SignInForm";
 import SignUpForm from "../SignUpForm";
 import SuccessMessage from "../SuccessMessage";
+import LoadindScreen from "../LoadingScreen";
 
 import * as auth from "../../utils/api/MainApi";
 import * as newsApi from "../../utils/api/NewsApi";
@@ -59,6 +60,7 @@ function App() {
   );
   const [showSearchResults, setShowSearchResults] = React.useState(searchResults.length > 0);
   const [numberOfCards, setNumberOfCards] = React.useState(3);
+  const [showLoadingScreen, setShowLoadingScreen] = React.useState(true);
 
   function handleWindowResize() {
     setWindowSize({
@@ -199,7 +201,10 @@ function App() {
           localStorage.removeItem("jwt");
           setJwt("");
           console.log(err);
-        });
+        })
+        .finally(() => setShowLoadingScreen(false));
+    } else {
+      setShowLoadingScreen(false);
     }
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
@@ -243,6 +248,10 @@ function App() {
   React.useEffect(() => {
     localStorage.setItem(searchStorageKeys.results, JSON.stringify(searchResults));
   }, [searchResults]);
+
+  if (showLoadingScreen) {
+    return <LoadindScreen />;
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

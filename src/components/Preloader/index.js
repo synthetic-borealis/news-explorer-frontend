@@ -1,12 +1,11 @@
 import "./Preloader.css";
 
-function Preloader() {
-  const preloaderClassName = "Preloader";
-  const circleClassName = "Preloader__circle";
+import LoadingCircle from "../LoadingCircle";
 
+function Preloader() {
   return (
-    <section className={preloaderClassName}>
-      <div className={circleClassName} />
+    <section className="Preloader">
+      <LoadingCircle />
     </section>
   );
 }
