@@ -28,7 +28,7 @@ import {
 } from "../../utils/constants";
 
 function App() {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [isMobilePhone, setIsMobilePhone] = React.useState(
     window.innerWidth <= maxMobileWidth
   );
@@ -76,7 +76,7 @@ function App() {
     setSavedArticles([]);
     setSearchResults([]);
     setShowSearchResults(false);
-    history.push(routePaths.home);
+    navigate(routePaths.home);
   }
 
   function handleLogin({ email, password }) {
@@ -187,6 +187,12 @@ function App() {
     }
   }
 
+  function handleNoLogin() {
+    if (!isPopupOpen) {
+      setTimeout(() => setIsPopupOpen(true));
+    }
+  }
+
   React.useEffect(() => {
     if (searchResults.length > 0) {
       setShowSearchResults(true);
@@ -266,7 +272,7 @@ function App() {
           <Route
             path={routePaths.savedNews}
             element={
-              <ProtectedRoute isLoggedIn={typeof currentUser === "object"}>
+              <ProtectedRoute isLoggedIn={typeof currentUser === "object"} onNoLogin={handleNoLogin}>
                 <SavedNews
                   savedArticles={savedArticles}
                   onCardDeleteClick={handleDeleteCard}
