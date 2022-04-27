@@ -23,17 +23,16 @@ function Navigation({
   const navigationClasses = `Navigation${
     isBackgroundWhite ? " Navigation_background_white" : ""
   }`;
-  const titleClassName = "Navigation__title";
-  const containerClassName = "Navigation__container";
-  const itemClassName = "Navigation__item";
-  const linkClassName = "Navigation__link";
-  const activeLinkClass = "Navigation__link_active";
-  const homeLinkClass = "Navigation__link_target_home";
-  const savedLinkClass = "Navigation__link_target_saved";
+  const getHomeLinkClass = ({isActive}) => {
+    return `Navigation__link Navigation__link_target_home ${isActive ? " Navigation__link_active" : ""}`;
+  };
+  const getSavedLinkClass = ({isActive}) => {
+    return `Navigation__link Navigation__link_target_saved ${isActive ? " Navigation__link_active" : ""}`;
+  };
 
   return (
     <nav className={navigationClasses}>
-      <h2 className={titleClassName}>NewsExplorer</h2>
+      <h2 className="Navigation__title">NewsExplorer</h2>
       {isMobilePhone ? (
         <MenuButton
           onClick={onMenuButtonClick}
@@ -41,23 +40,19 @@ function Navigation({
           isBackgroundWhite={isBackgroundWhite}
         />
       ) : (
-        <ul className={containerClassName}>
-          <li className={itemClassName}>
+        <ul className="Navigation__container">
+          <li className="Navigation__item">
             <NavLink
-              exact
-              className={`${linkClassName} ${homeLinkClass}`}
-              activeClassName={activeLinkClass}
+              className={getHomeLinkClass}
               to={routePaths.home}
             >
               Home
             </NavLink>
           </li>
           {isLoggedIn ? (
-            <li className={itemClassName}>
+            <li className="Navigation__item">
               <NavLink
-                exact
-                className={`${linkClassName} ${savedLinkClass}`}
-                activeClassName={activeLinkClass}
+                className={getSavedLinkClass}
                 to={routePaths.savedNews}
               >
                 Saved articles
@@ -67,7 +62,7 @@ function Navigation({
             ""
           )}
           {isLoggedIn ? (
-            <li className={itemClassName}>
+            <li className="Navigation__item">
               <SignoutButton
                 userName={userName}
                 ariaLabel="sign out"
@@ -75,7 +70,7 @@ function Navigation({
               />
             </li>
           ) : (
-            <li className={itemClassName}>
+            <li className="Navigation__item">
               <LoginButton ariaLabel="sign in" onClick={onLoginClick} />
             </li>
           )}
