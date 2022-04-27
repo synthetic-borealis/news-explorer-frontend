@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -28,7 +28,7 @@ import {
 } from "../../utils/constants";
 
 function App() {
-  const history = useHistory();
+  const history = useNavigate();
   const [isMobilePhone, setIsMobilePhone] = React.useState(
     window.innerWidth <= maxMobileWidth
   );
@@ -261,30 +261,38 @@ function App() {
           onLogoutClick={handleLogout}
           onLoginClick={handleLoginButton}
         />
-        <Switch>
-          <ProtectedRoute path={routePaths.savedNews} isLoggedIn={typeof currentUser === "object"}>
-            <SavedNews
-              savedArticles={savedArticles}
-              onCardDeleteClick={handleDeleteCard}
-            />
-          </ProtectedRoute>
-          <Route exact path={routePaths.home}>
-            <Home
-              onSearch={handleSearch}
-              onCardSaveClick={handleSaveCard}
-              onCardDeleteClick={handleDeleteCard}
-              numberOfCards={{
-                value: numberOfCards,
-                setValue: setNumberOfCards,
-              }}
-              isPreloaderVisible={isPreloaderVisible}
-              searchResults={searchResults}
-              showSearchResults={showSearchResults}
-              savedArticles={savedArticles}
-              keyword={keyword}
-            />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            path={routePaths.savedNews}
+            element={
+              <ProtectedRoute isLoggedIn={typeof currentUser === "object"}>
+                <SavedNews
+                  savedArticles={savedArticles}
+                  onCardDeleteClick={handleDeleteCard}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={routePaths.home}
+            element={
+              <Home
+                onSearch={handleSearch}
+                onCardSaveClick={handleSaveCard}
+                onCardDeleteClick={handleDeleteCard}
+                numberOfCards={{
+                  value: numberOfCards,
+                  setValue: setNumberOfCards,
+                }}
+                isPreloaderVisible={isPreloaderVisible}
+                searchResults={searchResults}
+                showSearchResults={showSearchResults}
+                savedArticles={savedArticles}
+                keyword={keyword}
+              />
+            }
+          />
+        </Routes>
         <Footer />
         {isPopupOpen ? (
           <Popup isVisible={isPopupVisible} onClose={handlePopupClose}>
