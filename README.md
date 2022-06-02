@@ -1,5 +1,8 @@
 # News Explorer Frontend
 
+## Links
+* [Backend Repository](https://github.com/synthetic-borealis/news-explorer-api).
+
 ## Screenshots
 <figure>
 <img src="./screenshots/dev-s3-main.jpg" alt="main screen">
