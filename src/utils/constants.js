@@ -33,7 +33,8 @@ const errorMessages = {
 };
 
 const authApiOptions = {
-  baseUrl: "http://localhost:4000",
+  // baseUrl: "http://localhost:4000",
+  baseUrl: "https://api.the-news-explorer.tk",
   baseHeaders: {
     Accept: "application/json",
     "Content-Type": "application/json",
